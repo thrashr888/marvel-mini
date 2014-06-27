@@ -1,0 +1,32 @@
+{
+  "name": "marvel-mini",
+  "version": "0.0.0",
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thrashr888/marvel-mini.git"
+  },
+  "devDependencies": {
+    "gulp": "~3.8.3",
+    "gulp-autoprefixer": "~0.0.7",
+    "gulp-bower": "0.0.6",
+    "gulp-browserify": "~0.5.0",
+    "gulp-cache": "~0.2.0",
+    "gulp-connect": "~2.0.5",
+    "gulp-imagemin": "~0.6.1",
+    "gulp-jade": "~0.6.0",
+    "gulp-jshint": "~1.6.3",
+    "gulp-less": "~1.2.4",
+    "gulp-load-plugins": "~0.5.0",
+    "gulp-plumber": "^0.6.3",
+    "gulp-react": "~0.4.0",
+    "gulp-rimraf": "~0.1.0",
+    "gulp-size": "~0.4.0",
+    "gulp-useref": "~0.4.2",
+    "gulp-util": "~2.2.19",
+    "reactify": "~0.13.1"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  }
+}
