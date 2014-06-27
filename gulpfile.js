@@ -25,36 +25,24 @@ gulp.task('styles', function () {
 });
 
 
-
-
-
 // Scripts
 gulp.task('scripts', function () {
-    return gulp.src('app/scripts/app.js')
+    return gulp.src('app/scripts/app.jsx', { read: false })
         .pipe($.browserify({
-            insertGlobals: true,
-            transform: ['reactify']
+            // insertGlobals: true,
+            // transform: ['reactify', {'harmony': true}]
+            insertGlobals : false,
+            transform: ['reactify'],
+            extensions: ['.jsx'],
+            // debug: !gulp.env.production
         }))
+        .pipe($.rename('app.js'))
         // .pipe($.jshint('.jshintrc'))
         // .pipe($.jshint.reporter('default'))
         .pipe(gulp.dest('dist/scripts'))
         .pipe($.size())
         .pipe($.connect.reload());
-    });
-
-// React precomiler
-gulp.task('jsx', function () {
-    return gulp.src('app/scripts/**/*.jsx', {base: 'app/scripts'})
-        .pipe($.react())
-        // .pipe($.jshint('.jshintrc'))
-        // .pipe($.jshint.reporter('default'))
-        .pipe(gulp.dest('app/scripts'))
-        .pipe($.size())
-        .pipe($.connect.reload());
-    });
-
-
-
+});
 
 
 gulp.task('jade', function () {
@@ -157,7 +145,7 @@ gulp.task('watch', ['html', 'bundle', 'connect'], function () {
 
 
     // Watch .jsx files
-    gulp.watch('app/scripts/**/*.jsx', ['jsx', 'scripts']);
+    gulp.watch('app/scripts/**/*.jsx', ['scripts']);
 
     // Watch .js files
     gulp.watch('app/scripts/**/*.js', ['scripts']);

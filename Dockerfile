@@ -13,7 +13,7 @@ ADD . /src
 
 RUN bower install --allow-root
 
-RUN gulp build
+RUN cd /src; gulp build
 
 EXPOSE  9000
 
