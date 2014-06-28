@@ -23,8 +23,6 @@ var HomePage = React.createClass({
     'CreatorStore'
   )],
 
-  page: 1,
-
   getStateFromFlux: function() {
     var flux = this.getFlux();
     // Normally we'd use one key per store, but we only have one store, so
@@ -42,7 +40,7 @@ var HomePage = React.createClass({
     // console.log('Flux', this.getFlux());
     // console.log('actions', this.getFlux().actions);
     this.getFlux().actions.getComics({
-        page: this.page,
+        page: this.state.page,
         limit: 24
       });
     this.getFlux().actions.getCreators({
@@ -69,16 +67,17 @@ var HomePage = React.createClass({
   loadMoreComics: function (event) {
     event.preventDefault();
 
-    this.page = this.page + 1;
+    this.state.page = this.state.page + 1;
     this.getFlux().actions.getComics({
-        page: this.page,
+        page: this.state.page,
         limit: 24
       });
   },
 
   getInitialState: function() {
     return {
-      jumboIndex: 0
+      jumboIndex: 0,
+      page: 1
     };
   },
 

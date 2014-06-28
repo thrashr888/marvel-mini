@@ -36,7 +36,7 @@ var ComicStore = Fluxxor.createStore({
 
   onGetComics: function onGetComics(payload) {
     // console.log(payload)
-    var page = (page || 1) - 1;
+    var page = (payload.page || 1) - 1;
     var path = this.endpoint +
       '?offset=' + (payload.limit * page) +
       '&orderBy=' + (payload.orderBy || '-focDate') +
