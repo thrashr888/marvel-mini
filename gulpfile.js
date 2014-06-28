@@ -1,6 +1,9 @@
 'use strict';
 
 var gulp = require('gulp');
+var crypto = require('crypto');
+var env = require('node-env-file');
+env(__dirname + '/.env');
 
 // Load plugins
 var $ = require('gulp-load-plugins')();
@@ -116,6 +119,57 @@ gulp.task('connect', function() {
     });
 });
 
+// var env = fs.readFileSync('env').toString();
+// var env = require('env');
+// console.log(process.env)
+
+var ts = (new Date()).toString();
+var hash = crypto.createHash('md5')
+    .update(ts + process.env.MARVEL_PRIVATE_KEY + process.env.MARVEL_PUBLIC_KEY)
+    .digest('hex');
+var stubbyData = [
+    {
+    request: {
+      url: '^/v1/public/comics$',
+      method: 'GET'
+    },
+    response: process.env.MARVEL_API_ENDPOINT +
+        '/v1/public/comics?orderBy=-focDate&limit=48' +
+        '&ts=' + ts +
+        '&apikey=' + process.env.MARVEL_PUBLIC_KEY +
+        '&hash=' + hash
+  },
+  {
+    request: {
+      url: '^/v1/public/creators',
+      method: 'GET'
+    },
+    response: process.env.MARVEL_API_ENDPOINT +
+        '/v1/public/creators?orderBy=-modified&limit=48' +
+        '&ts=' + ts +
+        '&apikey=' + process.env.MARVEL_PUBLIC_KEY +
+        '&hash=' + hash
+  }
+];
+
+gulp.task('stubby', function() {
+    var Stubby = require('stubby').Stubby;
+    var mockService = new Stubby();
+    mockService.start({
+        persistent: true,
+        mute: false,
+        relativeFilesPath: true,
+        location: 'localhost',
+        stubs: 9001,
+        admin: 9002,
+        data: stubbyData
+    }, function (err) {
+        if (err) {
+            console.error(err);
+        }
+    });
+});
+
 // Bower helper
 gulp.task('bower', function() {
     gulp.src('app/bower_components/**/*.js', {base: 'app/bower_components'})
@@ -130,7 +184,7 @@ gulp.task('json', function() {
 
 
 // Watch
-gulp.task('watch', ['html', 'bundle', 'connect'], function () {
+gulp.task('watch', ['html', 'bundle', 'connect', 'stubby'], function () {
 
     // Watch .json files
     gulp.watch('app/scripts/**/*.json', ['json']);
@@ -140,7 +194,7 @@ gulp.task('watch', ['html', 'bundle', 'connect'], function () {
 
 
     // Watch .scss files
-    gulp.watch('app/styles/**/*.scss', ['styles']);
+    gulp.watch('app/styles/**/*.less', ['styles']);
 
 
 

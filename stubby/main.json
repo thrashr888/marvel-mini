@@ -1,0 +1,42 @@
+[
+  {
+    "request": {
+      "url": "^/$",
+      "method": "GET"
+    },
+    "response": {
+      "status": 200,
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": "{\"message\": \"Hello World.\"}"
+    }
+  },
+  {
+    "request": {
+      "url": "^/v1/public/comics$",
+      "method": "GET",
+      "query": {
+        "orderBy": "^.*$",
+        "limit": "^.*$",
+        "apiKey": "^.*$"
+      },
+      "headers": {
+         "hostname": "gateway.marvel.com"
+       }
+    },
+    "response": "http://gateway.marvel.com/v1/public/comics?orderBy=-focDate&limit=24&apikey=ae5b76f41876fbf3e9c8985ea1e9c807"
+  },
+  {
+    "request": {
+      "url": "^/v1/public/creators",
+      "method": "GET",
+      "query": {
+        "orderBy": "-modified",
+        "limit": 48,
+        "apiKey": "ae5b76f41876fbf3e9c8985ea1e9c807"
+      }
+    },
+    "response": "http://gateway.marvel.com/v1/public/creators?orderBy=-modified&limit=48&apikey=ae5b76f41876fbf3e9c8985ea1e9c807"
+  }
+]
