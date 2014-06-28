@@ -30,10 +30,15 @@ gulp.task('scripts', function () {
     return gulp.src('app/scripts/app.jsx', { read: false })
         .pipe($.browserify({
             // insertGlobals: true,
-            // transform: ['reactify', {'harmony': true}]
+            // transform: ['reactify', {'harmony': true}],
+            transform: [
+                ['es6ify'],
+                ['reactify', {'es6': true}]
+            ],
             insertGlobals : false,
-            transform: ['reactify'],
+            // transform: ['reactify'],
             extensions: ['.jsx'],
+            harmony: true,
             // debug: !gulp.env.production
         }))
         .pipe($.rename('app.js'))
