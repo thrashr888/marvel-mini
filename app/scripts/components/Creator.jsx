@@ -19,7 +19,7 @@ var Creator = React.createClass({
     var item = this.props.creator;
     return (
       <div className={'row l-list col-md-12'}>
-        <h2>{item.firstName + ' ' + item.lastName}</h2>
+        <h3>{item.fullName}</h3>
       </div>
     );
   }

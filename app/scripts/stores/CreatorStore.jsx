@@ -14,6 +14,8 @@ var CreatorStore = Fluxxor.createStore({
     'GET_CREATORS': 'onGetCreators'
   },
 
+  endpoint: '/v1/public/creators',
+
   initialize: function initialize() {
     this.creators = [];
   },
@@ -31,8 +33,13 @@ var CreatorStore = Fluxxor.createStore({
 
   onGetCreators: function onGetDocs(payload) {
       // console.log(payload)
+    var path = this.endpoint +
+      '?orderBy=' + (payload.orderBy || '-modified') +
+      '&limit=' + (payload.limit || 48);
+    var url = Config.marvelApiEndpoint + path + '&apikey=' + Config.marvelUserKey;
+
     $.ajax({
-      url: Config.marvelApiEndpoint + payload.url + '&apikey=' + Config.marvelUserKey,
+      url: url,
       dataType: 'json',
       success: function(res) {
         console.log('creators res', res)

@@ -16,12 +16,12 @@ var actions = {
     this.dispatch('ADD_CREATORS', {creators: creators});
   },
 
-  getComics: function getComics(url) {
-    this.dispatch('GET_COMICS', {url: url});
+  getComics: function getComics(payload) {
+    this.dispatch('GET_COMICS', payload);
   },
 
-  getCreators: function getCreators(url) {
-    this.dispatch('GET_CREATORS', {url: url});
+  getCreators: function getCreators(payload) {
+    this.dispatch('GET_CREATORS', payload);
   }
 };
 

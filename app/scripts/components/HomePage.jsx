@@ -28,20 +28,25 @@ var HomePage = React.createClass({
     // Normally we'd use one key per store, but we only have one store, so
     // we'll use the state of the store as our entire state here.
     return {
+      featuredComics: flux.store('ComicStore').getFeaturedComics(),
       comics: flux.store('ComicStore').getState(),
       creators: flux.store('CreatorStore').getState(),
     };
   },
 
-  componentDidMount: function() {
+  componentWillMount: function() {
     // console.log('this', this);
     // console.log('this.context', this.context);
     // console.log('Flux', this.getFlux());
     // console.log('actions', this.getFlux().actions);
-    this.getFlux().actions
-      .getComics('/v1/public/comics?orderBy=-focDate&limit=24');
-    this.getFlux().actions
-      .getCreators('/v1/public/creators?orderBy=-modified&limit=48');
+    this.getFlux().actions.getComics({
+        page: 1,
+        limit: 24
+      });
+    this.getFlux().actions.getCreators({
+        page: 1,
+        limit: 48
+      });
   },
 
   getInitialState: function() {
@@ -52,7 +57,7 @@ var HomePage = React.createClass({
   render: function () {
     // console.log(this.state)
     if (this.state.comics) {
-      var featuredComicList = this.state.comics.comics.slice(0, 3).map(function (comic, index) {
+      var featuredComicList = this.state.featuredComics.comics.map(function (comic, index) {
         return <Comic comic={comic} key={comic.id} />
       });
       var comicList = this.state.comics.comics.slice(4, 28).map(function (comic, index) {
@@ -63,7 +68,7 @@ var HomePage = React.createClass({
     }
 
     if (this.state.creators) {
-      console.log(this.state.creators)
+      // console.log(this.state.creators)
       var creatorList = this.state.creators.creators.slice(6, 12).map(function (creator, index) {
         return <Creator creator={creator} key={creator.id} />
       });
