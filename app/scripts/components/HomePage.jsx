@@ -121,22 +121,22 @@ var HomePage = React.createClass({
             <p className="lead">A showcase of Marvel comics and creators.</p>
         </div>
 
-        <div className={'row l-list l-featured l-featured--comics'}>
+        <div className="row l-list l-featured l-featured--comics">
           {featuredComicList}
         </div>
 
-        <div className={'row l-list l-featured l-featured--creators'}>
+        <div className="row l-list l-featured l-featured--creators">
           <h2 className="col-md-12"><span>Latest Creators</span></h2>
           {creatorList}
         </div>
 
-        <div className={'row l-list'}>
+        <div className="row l-list">
           <h2 className="col-md-12"><span>Latest Comics</span></h2>
           {comicList}
         </div>
 
         <div className="row">
-          <div className="col-md-6  col-md-offset-3">
+          <div className="col-md-6 col-md-offset-3">
             <a onClick={this.loadMoreComics} href="#" className="btn btn-default btn-lg btn-block">Load More</a>
           </div>
         </div>

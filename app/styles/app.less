@@ -7,6 +7,22 @@ h2 {
 body {
     // background-color: rgb(33,33,33);
     // color: rgb(233,233,233);
+    padding: 0;
+}
+
+@dark-gradient: linear-gradient(135deg, #0c0c0c 0%,#111111 9%,#1b1b1b 24%,#0b0b0b 40%,#000000 49%,#1b1b1b 50%,#2c2c2c 61%,#3f3f3f 75%,#373737 88%,#2f2f2f 100%);
+
+.btn-default {
+    &:hover {
+        color: white;
+        background: @dark-gradient;
+    }
+    border-radius: 1px;
+
+    text-transform: uppercase;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 180%;
 }
 
 .m-comic {
@@ -22,6 +38,7 @@ body {
 .l-featured--hero {
     color: white;
     text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+    font-style: italic;
 
     background-repeat: no-repeat;
     background-position: center;
@@ -39,19 +56,23 @@ body {
         opacity:0.4;
     }
 
-    padding-top: 98px;
-    padding-bottom: 98px;
+    padding-top: 135px;
+    padding-bottom: 135px;
 
     transition: background-image 0.2s ease-in-out;
+
+    h1 {
+        font-size: 130px;
+        text-transform: uppercase;
+        font-weight: bold;
+        font-style: italic;
+    }
 }
 
 .l-list {
     .make-row();
 
     h2 {
-        // margin-left: 33px;
-        // margin-right: 33px;
-
         background-color: black;
 
         span {
@@ -64,11 +85,21 @@ body {
         }
     }
 
+    &.l-featured--comics {
+        .m-comic {
+            height: 255px;
+        }
+        margin-top: 45px;
+    }
+
     &.l-featured--creators {
+        margin: 0 -15px 35px;
+        // background-color: rgb(22,22,22);
+        background: @dark-gradient;
+
         h2 {
             color: rgb(233,233,233);
-
-            background-color: transparent;
+            background: none;
             border-width: 2px;
             border-color: white;
 
@@ -77,9 +108,6 @@ body {
                 color: white;
             }
         }
-
-        margin: 0 -15px 0;
-        background-color: rgb(33,33,33);
 
         .m-creator {
             border: 1px solid white;
@@ -119,6 +147,12 @@ body {
                 text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
                 display: inline;
                 padding: 6px;
+
+                &:hover {
+                    background-color: black;
+                    text-shadow: none;
+                    text-decoration: none;
+                }
             }
 
             position: absolute;
@@ -178,5 +212,16 @@ body {
     .m-comic,
     .m-creator {
         .make-md-column(12);
+    }
+}
+
+.m-footer--container {
+    background-color: black;
+    color: rgb(150,150,150);
+    padding-top: 22px;
+    padding-bottom: 22px;
+
+    .m-footer {
+        text-align: right;
     }
 }
