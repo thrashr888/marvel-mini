@@ -1,11 +1,12 @@
 /**
  * @jsx React.DOM
  */
-/*globals $*/
 
 'use strict';
 
 var Fluxxor = require('fluxxor/index.js');
+var $ = require('jquery');
+var Config = require('../config.jsx');
 
 var CreatorStore = Fluxxor.createStore({
   actions: {
@@ -20,10 +21,7 @@ var CreatorStore = Fluxxor.createStore({
   onAddCreators: function onAddCreators(payload) {
     for (var i = 0, l = payload.creators.length; i < l; i++) {
       var creator = payload.creators[i];
-      this.creators.push({
-        id: creator.id || uuid.v4(),
-        name: creator.name
-      });
+      this.creators.push(creator);
     }
     this.emit('change');
   },
@@ -31,10 +29,11 @@ var CreatorStore = Fluxxor.createStore({
   onGetCreators: function onGetDocs(payload) {
       // console.log(payload)
     $.ajax({
-      url: payload.url,
+      url: Config.marvelApiEndpoint + payload.url + '&apikey=' + Config.marvelUserKey,
       dataType: 'json',
       success: function(res) {
-        this.onAddCreators({creators: res.creators});
+        console.log('creators res', res)
+        this.onAddCreators({creators: res.data.results});
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(payload.url, status, err.toString());

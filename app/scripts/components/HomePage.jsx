@@ -11,6 +11,7 @@ var FluxMixin = Fluxxor.FluxMixin(React),
     StoreWatchMixin = Fluxxor.StoreWatchMixin;
 
 var Comic = require('./Comic.jsx');
+var Creator = require('./Creator.jsx');
 
 /**
  * HomePage View
@@ -39,7 +40,8 @@ var HomePage = React.createClass({
     // console.log('actions', this.getFlux().actions);
     this.getFlux().actions
       .getComics('/v1/public/comics?orderBy=-focDate&limit=24');
-    // this.getFlux().actions.getCreators(this.props.config.marvelApiEndpoint + '/v1/public/creators');
+    this.getFlux().actions
+      .getCreators('/v1/public/creators?orderBy=-modified&limit=6');
   },
 
   getInitialState: function() {
@@ -49,10 +51,18 @@ var HomePage = React.createClass({
 
   render: function () {
     console.log(this.state)
-    // var comicList = [];
     if (this.state.comics) {
       var comicList = this.state.comics.comics.map(function (comic, index) {
         return <Comic comic={comic} key={comic.id} />
+      });
+    } else {
+      return <div><p>Loading...</p></div>
+    }
+
+    if (this.state.creators) {
+      console.log(this.state.creators)
+      var creatorList = this.state.creators.creators.map(function (creator, index) {
+        return <Creator creator={creator} key={creator.id} />
       });
     } else {
       return <div><p>Loading...</p></div>
@@ -69,9 +79,11 @@ var HomePage = React.createClass({
           [FEATURED COMICS]
         </div>
         <div className={'row col-md-12'}>
-          [FEATURED CREATORS]
+          <h2>Creator List</h2>
+          {creatorList}
         </div>
         <div className={'row col-md-12'}>
+          <h2>Comic List</h2>
           {comicList}
         </div>
       </div>

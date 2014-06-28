@@ -19,55 +19,26 @@ var ComicStore = Fluxxor.createStore({
   },
 
   onAddComics: function onAddComics(payload) {
-    console.log('payload', payload)
     for (var i = 0, l = payload.comics.length; i < l; i++) {
       var comic = payload.comics[i];
       // console.log(comic)
+      // characters, collectedIssues, collections, creators, dates,
+      // description, diamondCode, digitalId, ean, events, formats,
+      // id, images, isbn, issn, issueNumber, modified, pageCount,
+      // prices, resourceURI, series, stories, textObjects, thumbnail,
+      // title, upc, urls, variantDescription, variants
       this.comics.push(comic);
-
-      // this.comics.push({
-      //   characters
-      //   collectedIssues
-      //   collections
-      //   creators
-      //   dates
-      //   description
-      //   diamondCode
-      //   digitalId
-      //   ean
-      //   events
-      //   formats
-      //   id
-      //   images
-      //   isbn
-      //   issn
-      //   issueNumber
-      //   modified
-      //   pageCount
-      //   prices
-      //   resourceURI
-      //   series
-      //   stories
-      //   textObjects
-      //   thumbnail
-      //   title
-      //   upc
-      //   urls
-      //   variantDescription
-      //   variants
-      // });
     }
     this.emit('change');
   },
 
   onGetComics: function onGetComics(payload) {
       // console.log(payload)
-      console.log('Config', Config)
     $.ajax({
       url: Config.marvelApiEndpoint + payload.url + '&apikey=' + Config.marvelUserKey,
       dataType: 'json',
       success: function(res) {
-        console.log(res)
+        console.log('comics res', res)
         this.onAddComics({comics: res.data.results});
       }.bind(this),
       error: function(xhr, status, err) {
