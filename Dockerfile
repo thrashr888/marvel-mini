@@ -1,4 +1,5 @@
-# DOCKER-VERSION 0.3.4
+# DOCKER-VERSION 1.0.1
+
 FROM peenuty/nodejs-npm-sass-docker
 
 MAINTAINER Paul Thrasher "thrashr888@gmail.com"
@@ -12,6 +13,8 @@ RUN npm install
 ADD . /src
 
 RUN bower install --allow-root
+
+RUN npm install -g gulp
 
 RUN cd /src; gulp build
 

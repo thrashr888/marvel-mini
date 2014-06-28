@@ -34,11 +34,11 @@ Marvel Mini is a showcase of Marvel comics and creators. It's a simple ReactJS d
     > vagrant up
     > vagrant ssh
 
-    > # Install Docker in Vagrant
+    > # Install Latest Docker in Vagrant
+    > wget -qO- https://get.docker.io/gpg | sudo apt-key add -
+    > sudo sh -c "echo deb http://get.docker.io/ubuntu docker main > /etc/apt/sources.list.d/docker.list"
     > sudo apt-get update
-    > sudo apt-get install -qy software-properties-common # needed for add-apt-repository etc
-    > sudo apt-get install -qy docker.io
-    > sudo ln -sf /usr/bin/docker.io /usr/local/bin/docker
+    > sudo apt-get install -qy lxc-docker
 
 ## Vagrant/Docker Build & Run
 
