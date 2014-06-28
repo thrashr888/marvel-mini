@@ -21,6 +21,9 @@ var CreatorStore = Fluxxor.createStore({
   onAddCreators: function onAddCreators(payload) {
     for (var i = 0, l = payload.creators.length; i < l; i++) {
       var creator = payload.creators[i];
+      // console.log(creator)
+      // comics, events, firstName, fullName, id, lastName, middleName
+      // modified, resourceURI, series, stories, suffix, thumbnail, urls
       this.creators.push(creator);
     }
     this.emit('change');

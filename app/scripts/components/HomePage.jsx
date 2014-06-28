@@ -41,7 +41,7 @@ var HomePage = React.createClass({
     this.getFlux().actions
       .getComics('/v1/public/comics?orderBy=-focDate&limit=24');
     this.getFlux().actions
-      .getCreators('/v1/public/creators?orderBy=-modified&limit=6');
+      .getCreators('/v1/public/creators?orderBy=-modified&limit=48');
   },
 
   getInitialState: function() {
@@ -50,9 +50,12 @@ var HomePage = React.createClass({
   },
 
   render: function () {
-    console.log(this.state)
+    // console.log(this.state)
     if (this.state.comics) {
-      var comicList = this.state.comics.comics.map(function (comic, index) {
+      var featuredComicList = this.state.comics.comics.slice(0, 3).map(function (comic, index) {
+        return <Comic comic={comic} key={comic.id} />
+      });
+      var comicList = this.state.comics.comics.slice(4, 28).map(function (comic, index) {
         return <Comic comic={comic} key={comic.id} />
       });
     } else {
@@ -61,7 +64,7 @@ var HomePage = React.createClass({
 
     if (this.state.creators) {
       console.log(this.state.creators)
-      var creatorList = this.state.creators.creators.map(function (creator, index) {
+      var creatorList = this.state.creators.creators.slice(6, 12).map(function (creator, index) {
         return <Creator creator={creator} key={creator.id} />
       });
     } else {
@@ -76,7 +79,8 @@ var HomePage = React.createClass({
             <p><a className="btn btn-lg btn-success" href="#">Splendid!</a></p>
         </div>
         <div className={'row col-md-12'}>
-          [FEATURED COMICS]
+          <h2>Featured Comics</h2>
+          {featuredComicList}
         </div>
         <div className={'row col-md-12'}>
           <h2>Creator List</h2>

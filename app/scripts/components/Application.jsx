@@ -77,7 +77,7 @@ var Application = React.createClass({
 
         {this.state.component}
 
-        <div className="footer">
+        <div className="footer row col-md-12">
             <p>&copy; 2014 Paul Thrasher</p>
         </div>
       </div>
