@@ -15,14 +15,19 @@ var Creator = React.createClass({
   mixins: [FluxChildMixin],
 
   render: function () {
-    // console.log(this.props.item.input.split('\n').length)
+    // console.log('creator props', this.props)
     var item = this.props.creator;
     var thumbnail = item.thumbnail ? <img src={item.thumbnail.path + '.' + item.thumbnail.extension} /> : '';
+    if (item.thumbnail && !item.thumbnail.path.match(/image_not_available$/)) {
+      this.props.className = this.props.className + ' has-image';
+    }
 
     return (
-      <div className={'row m-creator ' + this.props.className} style={{backgroundImage: 'url(' + item.thumbnail.path + '.' + item.thumbnail.extension + ')'}}>
-        <h3 className="m-creator--title"><a href={'/creator/' + item.id}>{item.fullName}</a></h3>
-        <div className="m-creator--image">{thumbnail}</div>
+      <div className={'m-creator--container ' + this.props.className}>
+        <div className="m-creator" style={{backgroundImage: 'url(' + item.thumbnail.path + '.' + item.thumbnail.extension + ')'}}>
+          <h3 className="m-creator--title"><a className="m-creator--title--text" href={'/creator/' + item.id}>{item.fullName}</a></h3>
+          <div className="m-creator--image">{thumbnail}</div>
+        </div>
       </div>
     );
   }

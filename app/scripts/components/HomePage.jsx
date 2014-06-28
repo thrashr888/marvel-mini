@@ -30,9 +30,9 @@ var HomePage = React.createClass({
     // Normally we'd use one key per store, but we only have one store, so
     // we'll use the state of the store as our entire state here.
     return {
-      featuredComics: flux.store('ComicStore').getFeaturedComics(),
+      featuredComics: flux.store('ComicStore').getFeaturedComics(2),
       comics: flux.store('ComicStore').getState(),
-      creators: flux.store('CreatorStore').getState(),
+      creators: flux.store('CreatorStore').getFeaturedCreators(6),
     };
   },
 
@@ -47,8 +47,23 @@ var HomePage = React.createClass({
       });
     this.getFlux().actions.getCreators({
         page: 1,
-        limit: 48
+        limit: 24
       });
+  },
+
+  componentDidMount: function() {
+    setInterval(function () {
+      this.state.jumboIndex++;
+      if (!this.state.comics.comics[this.state.jumboIndex]) {
+        this.state.jumboIndex = 0;
+      }
+
+      if (this.state.comics.comics[this.state.jumboIndex].thumbnail &&
+        !this.state.comics.comics[this.state.jumboIndex].thumbnail.path.match(/image_not_available$/)) {
+        // only update if there's a good image
+        this.forceUpdate();
+      }
+    }.bind(this), 1000);
   },
 
   loadMoreComics: function (event) {
@@ -63,62 +78,69 @@ var HomePage = React.createClass({
 
   getInitialState: function() {
     return {
+      jumboIndex: 0
     };
   },
 
   render: function () {
-    // console.log(this.state)
+    // console.log('homepage state', this.state)
     if (this.state.comics) {
       var featuredComicList = this.state.featuredComics.comics.map(function (comic, index) {
-        return <Comic comic={comic} key={comic.id + index + 'featured'} className="col-sm-6 col-md-6 col-lg-6" />
+        return <Comic comic={comic} className="col-lg-6 col-lg-6 col-sm-12" />;
       });
       var comicList = this.state.comics.comics.map(function (comic, index) {
-        return <Comic comic={comic} key={comic.id + index} className="col-sm-3 col-md-3 col-lg-3" />
+        return <Comic comic={comic} className="col-lg-3 col-lg-4 col-sm-6" />;
       });
     } else {
-      return <div><p>Loading...</p></div>
+      return <div><p>Loading...</p></div>;
     }
 
     if (this.state.creators) {
-      // console.log(this.state.creators)
       var creatorList = this.state.creators.creators.map(function (creator, index) {
-        // console.log(creator.id, index)
-        return <Creator creator={creator} className="col-sm-3 col-md-3 col-lg-3" />
+        return <Creator creator={creator} className="col-lg-2 col-lg-3 col-sm-4" />;
       });
     } else {
-      return <div><p>Loading...</p></div>
+      return <div><p>Loading...</p></div>;
     }
 
-    if (this.state.featuredComics.comics && this.state.featuredComics.comics[0]) {
-      var item = this.state.featuredComics.comics[0];
-      console.log('this.state.featuredComics.comics', this.state.featuredComics.comics);
+    this.state
+    if (this.state.comics.comics && this.state.comics.comics[this.state.jumboIndex]) {
+      var thumbnail = this.state.comics.comics[this.state.jumboIndex].thumbnail;
       var jumboStyles = {
-        backgroundImage: 'url(' + item.thumbnail.path + '.' + item.thumbnail.extension + ')'
+        backgroundImage: 'url(' + thumbnail.path + '.' + thumbnail.extension + ')'
       };
     } else {
       var jumboStyles = {};
     }
 
     return (
-      <div className="container-fluid l-home">
-        <div className="jumbotron" style={jumboStyles}>
+      <div className="l-page l-page--home">
+
+        <div className="row jumbotron l-featured l-featured--hero" style={jumboStyles}>
             <h1>Marvel Mini</h1>
-            <p className="lead">Always a pleasure scaffolding your apps.</p>
-            <p><a className="btn btn-lg btn-success" href="#">Splendid!</a></p>
+            <p className="lead">A showcase of Marvel comics and creators.</p>
         </div>
-        <div className={'row l-list col-md-12'}>
-          <h2>Featured Comics</h2>
+
+        <div className={'row l-list l-featured l-featured--comics'}>
           {featuredComicList}
         </div>
-        <div className={'row l-list col-md-12'}>
-          <h2>Creator List</h2>
+
+        <div className={'row l-list l-featured l-featured--creators'}>
+          <h2 className="col-md-12"><span>Latest Creators</span></h2>
           {creatorList}
         </div>
-        <div className={'row l-list col-md-12'}>
-          <h2>Comic List</h2>
+
+        <div className={'row l-list'}>
+          <h2 className="col-md-12"><span>Latest Comics</span></h2>
           {comicList}
         </div>
-        <div className="row col-md-12"><a onClick={this.loadMoreComics} href="#" className="btn btn-lg">Load More</a></div>
+
+        <div className="row">
+          <div className="col-md-6  col-md-offset-3">
+            <a onClick={this.loadMoreComics} href="#" className="btn btn-default btn-lg btn-block">Load More</a>
+          </div>
+        </div>
+
       </div>
     );
   }

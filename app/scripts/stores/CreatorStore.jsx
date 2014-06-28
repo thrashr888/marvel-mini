@@ -69,6 +69,12 @@ var CreatorStore = Fluxxor.createStore({
     };
   },
 
+  getFeaturedCreators: function getFeaturedCreators(count) {
+    return {
+      creators: this.creators.slice(0, count || 4)
+    };
+  },
+
   getState: function getState() {
     return {
       creators: this.creators

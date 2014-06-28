@@ -28,11 +28,11 @@ var Config = require('../config.jsx');
 var Application = React.createClass({
 
   routes: [
-    {path: '/', component: HomePage},
-    {path: '/comic/:id', component: ComicPage},
-    {path: '/creator/:id', component: CreatorPage},
-    {path: '/page/:id', component: BasicPage},
-    {path: '*', component: PageNotFoundPage}
+    {keyword: 'homeHub', path: '/', component: HomePage},
+    {keyword: 'comicDetail', path: '/comic/:id', component: ComicPage},
+    {keyword: 'creatorDetail', path: '/creator/:id', component: CreatorPage},
+    {keyword: 'basicDetail', path: '/page/:id', component: BasicPage},
+    {keyword: 'notFound', path: '*', component: PageNotFoundPage}
   ],
 
   componentDidMount: function() {
@@ -42,10 +42,11 @@ var Application = React.createClass({
     var self = this;
     this.routes.forEach(function (route) {
       var url = route.path;
+      var keyword = route.keyword;
       var Component = route.component;
-
       page(url, function (ctx) {
         self.setState({
+          componentKeyword: keyword,
           component: <Component
             params={ctx.params}
             querystring={ctx.querystring}
@@ -66,15 +67,21 @@ var Application = React.createClass({
 
   render: function () {
     // console.log('app props', this.props)
-    return (
-      <div className="container-fluid">
-
-        <div className="header">
+    // console.log('app state', this.state)
+    var topNav = null;
+    if (this.state.componentKeyword !== 'homeHub') {
+      topNav = <div className="header">
             <ul className="nav nav-pills pull-right">
                 <li className="active"><a href="/">Home</a></li>
             </ul>
             <h3 className="text-muted">Marvel Mini</h3>
-        </div>
+        </div>;
+    }
+
+    return (
+      <div className="container-fluid">
+
+        {topNav}
 
         {this.state.component}
 

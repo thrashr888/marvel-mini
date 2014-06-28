@@ -1,88 +1,182 @@
 
 h2 {
     border-bottom: 1px solid grey;
+    margin-bottom: 33px;
+}
+
+body {
+    // background-color: rgb(33,33,33);
+    // color: rgb(233,233,233);
 }
 
 .m-comic {
-    background-position: bottom;
-    background-size: cover;
-    background-repeat: no-repeat;
-
-    .m-comic--title {
-        background-color: rgba(255,255,255,0.8);
-        position: absolute;
-        top: 0;
-        z-index: 2;
-        padding: 8px;
-        width: 100%;
-    }
-
-    .m-comic--image {
-        img {
-            width: 100%;
-            border-radius: 3px;
-            margin: 0;
-            padding: 0;
-        }
-        position: absolute;
-        bottom: 0;
-        z-index: 1;
-    }
 }
 
 .m-creator {
-    background-position: bottom;
-    background-size: cover;
-    background-repeat: no-repeat;
-
-    .m-creator--title {
-        background-color: rgba(255,255,255,0.8);
-        position: absolute;
-        top: 0;
-        z-index: 2;
-        padding: 8px;
-        width: 100%;
-    }
-
-    .m-creator--image img {
-        img {
-            width: 100%;
-            border-radius: 3px;
-            margin: 0;
-            padding: 0;
-        }
-        position: absolute;
-        bottom: 0;
-        z-index: 1;
-    }
 }
 
-.l-home {
-    .jumbotron {
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-        border-radius: 3px;
+.l-page {
+    margin-bottom: 55px;
+}
+
+.l-featured--hero {
+    color: white;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+    border-top: 12px solid rgb(33,33,33);
+    border-bottom: 12px solid rgb(33,33,33);
+
+    &:before {
+        background: linear-gradient(white, black);
+        z-index:-1;
+        position:absolute;
+        left:0;
+        top:0;
+        opacity:0.4;
     }
+
+    padding-top: 98px;
+    padding-bottom: 98px;
+
+    transition: background-image 0.2s ease-in-out;
 }
 
 .l-list {
+    .make-row();
+
+    h2 {
+        // margin-left: 33px;
+        // margin-right: 33px;
+
+        background-color: black;
+
+        span {
+            background-color: white;
+            padding: 0 33px;
+            margin-left: 33px;
+            text-transform: uppercase;
+            font-style: italic;
+            font-weight: bold;
+        }
+    }
+
+    &.l-featured--creators {
+        h2 {
+            color: rgb(233,233,233);
+
+            background-color: transparent;
+            border-width: 2px;
+            border-color: white;
+
+            span {
+                background-color: transparent;
+                color: white;
+            }
+        }
+
+        margin: 0 -15px 0;
+        background-color: rgb(33,33,33);
+
+        .m-creator {
+            border: 1px solid white;
+            box-shadow: 5px 5px 0 rgb(255,255,255);
+        }
+    }
+
+    .m-comic--container,
+    .m-creator--container {
+        margin-bottom: 55px;
+    }
+
     .m-comic,
     .m-creator {
-        // width: 250px;
-        height: 350px;
+
+        height: 389px;
         padding: 0px;
+        margin: 0 33px 0;
         overflow: hidden;
-        box-shadow: 0 0 10px rgba(0,0,0,0.25);
-        border-radius: 3px;
+        border: 1px solid black;
+        box-shadow: 5px 5px 0 rgba(0,0,0,0.4);
+        border-radius: 1px;
+
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+
+        &:not(.has-image) {
+            background-position: left;
+        }
+
+        .m-comic--title {
+
+            .m-comic--title--text {
+                background-color: rgba(255,255,0,0.8);
+                color: rgba(255,255,255,1);
+                text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+                display: inline;
+                padding: 6px;
+            }
+
+            position: absolute;
+            bottom: 0;
+            z-index: 2;
+            margin: 0;
+            margin: 33px 49px 33px 0;
+            line-height: 36px;
+            font-size: 20px;
+            text-align: right;
+            // width: 100%;
+        }
+
+        .m-creator--title {
+            .m-creator--title--text {
+                background-color: rgba(255,255,255,1);
+                color: rgba(0,0,0,1);
+                text-shadow: 1px 1px 0 rgba(50,50,50,0.2);
+                display: inline;
+                padding: 2px;
+            }
+
+            position: absolute;
+            bottom: 0;
+            z-index: 2;
+            margin: 0;
+            margin: 13px 47px 13px 0;
+            line-height: 26px;
+            font-size: 18px;
+            text-align: right;
+        }
 
         .m-comic--image,
         .m-creator--image {
+            img {
+                width: 100%;
+                border-radius: 3px;
+                margin: 0;
+                padding: 0;
+            }
+            position: absolute;
+            bottom: 0;
+            z-index: 1;
+
             display: none;
         }
+    }
+
+    .m-creator {
+        height: 155px
     }
 }
 
 .l-detail {
+    .make-row();
 
+    .m-comic,
+    .m-creator {
+        .make-md-column(12);
+    }
 }

@@ -27,10 +27,12 @@ var Comic = React.createClass({
     });
 
     return (
-      <div className={'row m-comic ' + this.props.className} style={{backgroundImage: 'url(' + item.thumbnail.path + '.' + item.thumbnail.extension + ')'}}>
-        <h3 className="m-comic--title"><a href={'/comic/' + item.id}>{item.title}</a></h3>
-        <div className="m-comic--image">{thumbnail}</div>
-        <div>{urls}</div>
+      <div className={'m-comic--container ' + this.props.className}>
+        <div className="m-comic" style={{backgroundImage: 'url(' + item.thumbnail.path + '.' + item.thumbnail.extension + ')'}}>
+          <h3 className="m-comic--title"><a className="m-comic--title--text" href={'/comic/' + item.id}>{item.title}</a></h3>
+          <div className="m-comic--image">{thumbnail}</div>
+          <div className="m-comic--urls">{urls}</div>
+        </div>
       </div>
     );
   }

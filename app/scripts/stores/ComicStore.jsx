@@ -75,9 +75,9 @@ var ComicStore = Fluxxor.createStore({
     };
   },
 
-  getFeaturedComics: function getFeaturedComics() {
+  getFeaturedComics: function getFeaturedComics(count) {
     return {
-      comics: this.comics.slice(0, 2)
+      comics: this.comics.slice(0, count || 4)
     };
   },
 
