@@ -114,8 +114,20 @@ gulp.task('default', ['clean'], function () {
 gulp.task('connect', function() {
     $.connect.server({
         root: ['dist'],
+        index: 'dist/index.html',
         port: 9000,
-        livereload: true
+        livereload: true,
+        middleware: function(connect, opt) {
+            // mod-rewrite behavior
+            var staticFile = /!\.html|\.js(x)?|\.css|\.svg|\.jp(e?)g|\.png|\.gif$/;
+            return [function(req, res, next) {
+                if (!req.url.match(staticFile)) {
+                    require('fs').createReadStream(opt.index).pipe(res);
+                } else {
+                    next();
+                }
+            }];
+        }
     });
 });
 
