@@ -15,6 +15,7 @@ var ComicStore = Fluxxor.createStore({
   },
 
   endpoint: '/v1/public/comics',
+  loading: false,
 
   initialize: function initialize() {
     this.comics = [];
@@ -42,17 +43,23 @@ var ComicStore = Fluxxor.createStore({
       '&orderBy=' + (payload.orderBy || '-focDate') +
       '&limit=' + (payload.limit || 24);
     var url = Config.marvelApiEndpoint + path + '&apikey=' + Config.marvelUserKey;
-    console.log('url', url)
+    // console.log('url', url)
+    this.loading = true;
+    this.emit('change');
 
     $.ajax({
       url: url,
       dataType: 'json',
       success: function(res) {
         console.log('comics res', res)
+        this.loading = false;
+        this.emit('change');
         this.onAddComics({comics: res.data.results});
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(payload.url, status, err.toString());
+        this.loading = false;
+        this.emit('change');
       }.bind(this)
     });
   },
@@ -77,12 +84,14 @@ var ComicStore = Fluxxor.createStore({
 
   getFeaturedComics: function getFeaturedComics(count) {
     return {
+      loading: this.loading,
       comics: this.comics.slice(0, count || 4)
     };
   },
 
   getState: function getState() {
     return {
+      loading: this.loading,
       comics: this.comics
     };
   }

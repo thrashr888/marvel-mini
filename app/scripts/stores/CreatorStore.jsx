@@ -15,6 +15,7 @@ var CreatorStore = Fluxxor.createStore({
   },
 
   endpoint: '/v1/public/creators',
+  loading: false,
 
   initialize: function initialize() {
     this.creators = [];
@@ -37,16 +38,22 @@ var CreatorStore = Fluxxor.createStore({
       '?orderBy=' + (payload.orderBy || '-modified') +
       '&limit=' + (payload.limit || 48);
     var url = Config.marvelApiEndpoint + path + '&apikey=' + Config.marvelUserKey;
+    this.loading = true;
+    this.emit('change');
 
     $.ajax({
       url: url,
       dataType: 'json',
       success: function(res) {
         console.log('creators res', res)
+        this.loading = false;
+        this.emit('change');
         this.onAddCreators({creators: res.data.results});
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(payload.url, status, err.toString());
+        this.loading = false;
+        this.emit('change');
       }.bind(this)
     });
   },
@@ -71,12 +78,14 @@ var CreatorStore = Fluxxor.createStore({
 
   getFeaturedCreators: function getFeaturedCreators(count) {
     return {
+      loading: this.loading,
       creators: this.creators.slice(0, count || 4)
     };
   },
 
   getState: function getState() {
     return {
+      loading: this.loading,
       creators: this.creators
     };
   }

@@ -83,6 +83,7 @@ var HomePage = React.createClass({
 
   render: function () {
     // console.log('homepage state', this.state)
+
     if (this.state.comics) {
       var featuredComicList = this.state.featuredComics.comics.map(function (comic, index) {
         return <Comic comic={comic} className="col-lg-6 col-lg-6 col-sm-12" />;
@@ -102,7 +103,6 @@ var HomePage = React.createClass({
       return <div><p>Loading...</p></div>;
     }
 
-    this.state
     if (this.state.comics.comics && this.state.comics.comics[this.state.jumboIndex]) {
       var thumbnail = this.state.comics.comics[this.state.jumboIndex].thumbnail;
       var jumboStyles = {
@@ -110,6 +110,12 @@ var HomePage = React.createClass({
       };
     } else {
       var jumboStyles = {};
+    }
+
+    var loadingView = null;
+    // console.log('loading?', this.state.comics.loading)
+    if (this.state.comics.loading || this.state.creators.loading) {
+      loadingView = <div className="m-loading"><p>Loading...</p></div>;
     }
 
     return (
@@ -136,6 +142,7 @@ var HomePage = React.createClass({
 
         <div className="row">
           <div className="col-md-6 col-md-offset-3">
+            {loadingView}
             <a onClick={this.loadMoreComics} href="#" className="btn btn-default btn-lg btn-block">Load More</a>
           </div>
         </div>
