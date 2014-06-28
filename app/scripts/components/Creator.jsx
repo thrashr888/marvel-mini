@@ -17,9 +17,12 @@ var Creator = React.createClass({
   render: function () {
     // console.log(this.props.item.input.split('\n').length)
     var item = this.props.creator;
+    var thumbnail = item.thumbnail ? <img src={item.thumbnail.path + '.' + item.thumbnail.extension} /> : '';
+
     return (
-      <div className={'row l-list col-md-12'}>
-        <h3>{item.fullName}</h3>
+      <div className={'row m-creator ' + this.props.className} style={{backgroundImage: 'url(' + item.thumbnail.path + '.' + item.thumbnail.extension + ')'}}>
+        <h3 className="m-creator--title"><a href={'/creator/' + item.id}>{item.fullName}</a></h3>
+        <div className="m-creator--image">{thumbnail}</div>
       </div>
     );
   }

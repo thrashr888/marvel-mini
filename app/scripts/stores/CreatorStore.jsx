@@ -51,6 +51,24 @@ var CreatorStore = Fluxxor.createStore({
     });
   },
 
+  getCreator: function getCreator(id) {
+    // console.log('getComic', parseInt(id))
+    id = parseInt(id);
+    return this.creators.filter(function (creator) {
+        // console.log('getCreator', creator.id, id)
+        return (creator.id === id);
+      });
+  },
+
+  getCreators: function getCreators(page, length) {
+    page = (page || 1) - 1;
+    var start = length * page,
+      end = (length * page) + length;
+    return {
+      creators: this.creators.slice(start, end)
+    };
+  },
+
   getState: function getState() {
     return {
       creators: this.creators

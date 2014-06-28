@@ -36,10 +36,13 @@ var ComicStore = Fluxxor.createStore({
 
   onGetComics: function onGetComics(payload) {
     // console.log(payload)
+    var page = (page || 1) - 1;
     var path = this.endpoint +
-      '?orderBy=' + (payload.orderBy || '-focDate') +
+      '?offset=' + (payload.limit * page) +
+      '&orderBy=' + (payload.orderBy || '-focDate') +
       '&limit=' + (payload.limit || 24);
     var url = Config.marvelApiEndpoint + path + '&apikey=' + Config.marvelUserKey;
+    console.log('url', url)
 
     $.ajax({
       url: url,
@@ -74,7 +77,7 @@ var ComicStore = Fluxxor.createStore({
 
   getFeaturedComics: function getFeaturedComics() {
     return {
-      comics: this.comics.slice(0,4)
+      comics: this.comics.slice(0, 2)
     };
   },
 
