@@ -11,6 +11,7 @@ ADD package.json /src/
 RUN npm install
 
 ADD . /src
+ADD .env.example /.env
 
 RUN bower install --allow-root
 
