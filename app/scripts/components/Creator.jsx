@@ -29,19 +29,19 @@ var Creator = React.createClass({
     }
 
     var comics = item.comics.items.map(function (comic, index) {
-      return <li key={'comics' + index}><a href={resourceURItoLocal(comic.resourceURI)}>{comic.name}</a></li>;
+      return <li key={'cr-comics' + index}><a href={resourceURItoLocal(comic.resourceURI)}>{comic.name}</a></li>;
     });
     var events = item.events.items.map(function (event, index) {
-      return <li key={'events' + index}>{event.name}</li>;
+      return <li key={'cr-events' + index}>{event.name}</li>;
     });
     var serieses = item.series.items.map(function (series, index) {
-      return <li key={'series' + index}>{series.name}</li>;
+      return <li key={'cr-series' + index}>{series.name}</li>;
     });
     var stories = item.stories.items.map(function (story, index) {
-      return <li key={'stories' + index}>{story.name}</li>;
+      return <li key={'cr-stories' + index}>{story.name}</li>;
     });
     var urls = item.urls.map(function (url, index) {
-      return <a href={url.url} className="btn btn-default" key={'urls' + index}>{url.type}</a>;
+      return <a key={'cr-urls' + index} href={url.url} className="btn btn-default">{url.type}</a>;
     });
 
     return (

@@ -55,17 +55,17 @@ var Comic = React.createClass({
 
     var images = item.images.map(function (image, index) {
       var url = image.path + '.' + image.extension;
-      return <img src={url} key={'images' + index} />;
+      return <img key={'co-images' + index} src={url} />;
     });
     var urls = item.urls.map(function (url, index) {
-      return <a href={url.url} className="btn btn-default" key={'urls' + index}>{url.type}</a>;
+      return <a key={'co-urls' + index} href={url.url} className="btn btn-default">{url.type}</a>;
     });
     var creators = item.creators.items.map(function (creator, index) {
-      return <li key={'creators' + index}><a href={resourceURItoLocal(creator.resourceURI)}>{creator.name}</a></li>;
+      return <li key={'co-creators' + index}><a href={resourceURItoLocal(creator.resourceURI)}>{creator.name}</a></li>;
     });
 
     var textObjects = item.textObjects.map(function (text, index) {
-      return <p key={'textObjects' + index}>{text.text}</p>
+      return <p key={'co-textObjects' + index} dangerouslySetInnerHTML={{__html: text.text}}></p>
     });
 
     if (this.props.displaySize === 'full' && images[this.state.jumboIndex]) {

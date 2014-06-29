@@ -28,7 +28,8 @@ var CreatorStore = Fluxxor.createStore({
       // console.log(creator)
       // comics, events, firstName, fullName, id, lastName, middleName
       // modified, resourceURI, series, stories, suffix, thumbnail, urls
-      this.creators.push(creator);
+      // this.creators.push(creator);
+      this.creators[creator.id] = creator;
     }
     this.emit('change');
   },
@@ -46,7 +47,7 @@ var CreatorStore = Fluxxor.createStore({
       url: url,
       dataType: 'json',
       success: function(res) {
-        console.log('creators res', res)
+        // console.log('creators res', res)
         this.loading = false;
         this.emit('change');
         this.onAddCreators({creators: res.data.results});
@@ -69,7 +70,7 @@ var CreatorStore = Fluxxor.createStore({
       url: url,
       dataType: 'json',
       success: function(res) {
-        console.log('creator res', res)
+        // console.log('creator res', res)
         this.loading = false;
         this.emit('change');
         this.onAddCreators({creators: res.data.results});

@@ -31,7 +31,8 @@ var ComicStore = Fluxxor.createStore({
       // id, images, isbn, issn, issueNumber, modified, pageCount,
       // prices, resourceURI, series, stories, textObjects, thumbnail,
       // title, upc, urls, variantDescription, variants
-      this.comics.push(comic);
+      // this.comics.push(comic);
+      this.comics[comic.id] = comic;
     }
     this.emit('change');
   },
@@ -52,7 +53,7 @@ var ComicStore = Fluxxor.createStore({
       url: url,
       dataType: 'json',
       success: function(res) {
-        console.log('comics res', res)
+        // console.log('comics res', res)
         this.loading = false;
         this.emit('change');
         this.onAddComics({comics: res.data.results});
@@ -75,7 +76,7 @@ var ComicStore = Fluxxor.createStore({
       url: url,
       dataType: 'json',
       success: function(res) {
-        console.log('comic res', res)
+        // console.log('comic res', res)
         this.loading = false;
         this.emit('change');
         this.onAddComics({comics: res.data.results});
