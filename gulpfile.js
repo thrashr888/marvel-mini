@@ -92,7 +92,7 @@ gulp.task('clean', function () {
 });
 
 // Bundle
-gulp.task('bundle', ['styles', 'scripts', 'bower'], function () {
+gulp.task('bundle', ['styles', 'scripts', 'images', 'bower'], function () {
     return gulp.src('./app/*.html')
         .pipe($.plumber({
             errorHandler: onError
