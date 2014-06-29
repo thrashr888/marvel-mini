@@ -64,13 +64,42 @@ var ComicStore = Fluxxor.createStore({
     });
   },
 
+  onGetComic: function onGetComic(id) {
+    var path = this.endpoint + '/' + id;
+    var url = Config.marvelApiEndpoint + path + '&apikey=' + Config.marvelUserKey;
+    this.loading = true;
+    this.emit('change');
+
+    $.ajax({
+      url: url,
+      dataType: 'json',
+      success: function(res) {
+        console.log('comics res', res)
+        this.loading = false;
+        this.emit('change');
+        this.onAddComics({comics: res.data.results});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(payload.url, status, err.toString());
+        this.loading = false;
+        this.emit('change');
+      }.bind(this)
+    });
+  },
+
   getComic: function getComic(id) {
     // console.log('getComic', parseInt(id))
     id = parseInt(id);
-    return this.comics.filter(function (comic) {
+    var comics = this.comics.filter(function (comic) {
         // console.log('getComic', comic.id, id)
         return (comic.id === id);
       });
+    if (!comics) {
+      // TODO: test this
+      return this.onGetComic(id);
+    } else {
+      return comics[0];
+    }
   },
 
   getComics: function getComics(page, length) {

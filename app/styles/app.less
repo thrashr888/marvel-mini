@@ -172,6 +172,14 @@ body {
         background-size: cover;
         background-repeat: no-repeat;
 
+        .m-comic--series,
+        .m-comic--meta,
+        .m-comic--description,
+        .m-comic--creators,
+        .m-comic--urls {
+            display: none;
+        }
+
         &:not(.has-image) {
             background-position: left;
         }
@@ -246,11 +254,61 @@ body {
 }
 
 .l-detail {
-    .make-row();
+    background: linear-gradient(to bottom, #212121 0%, #000 100%);
+
+    .m-comic--container,
+    .m-creator--container {
+        background-color: white;
+    }
 
     .m-comic,
     .m-creator {
         .make-md-column(12);
+
+        background: none !important;
+        background-repeat: no-repeat;
+    }
+}
+
+.m-header--container {
+    background-color: rgb(33,33,33);
+
+    .m-header {
+        color: white;
+        margin-bottom: 0;
+        padding-top: 32px;
+
+        border-bottom: none;
+
+        .m-header--logo {
+            font-family: 'Oswald', sans-serif;
+            font-size: 30px;
+            text-transform: uppercase;
+            font-weight: bold;
+            font-style: italic;
+
+            a {
+                color: white;
+                text-decoration: none;
+            }
+        }
+
+        .m-header--nav .m-header--link {
+            background-color: white;
+
+            a {
+                color: black;
+                font-weight: bold;
+                font-style: italic;
+                padding: 6px 9px;
+                margin-top: 3px;
+
+                &:hover {
+                    background-color: rgb(33,33,33);
+                    color: white;
+                }
+            }
+        }
     }
 }
 

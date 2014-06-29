@@ -40,16 +40,18 @@ var CreatorPage = React.createClass({
   },
 
   render: function () {
-    console.log('CreatorPage props', this.props.params)
-    console.log('CreatorPage state', this.state)
+    // console.log('CreatorPage props', this.props.params)
+    // console.log('CreatorPage state', this.state)
 
-    if (this.state.creator && this.state.creator[0]) {
-        var creatorView = <Creator creator={this.state.creator[0]} key={this.state.creator[0].id} />
+    var creatorView = '';
+    if (this.state.creator && this.state.creator) {
+        var creatorView = <Creator creator={this.state.creator} key={this.state.creator.id} className="col-md-8 col-md-offset-2" displaySize="full" />
     } else {
-        var creatorView = <div><p>Loading...</p></div>
+        creatorView = <div className="m-loading"><p>Loading...</p></div>;
     }
+
     return (
-      <div className={'row l-detail col-md-12'}>
+      <div className={'row l-detail'}>
         {creatorView}
       </div>
     );

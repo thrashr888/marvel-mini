@@ -40,16 +40,18 @@ var ComicPage = React.createClass({
   },
 
   render: function () {
-    console.log('ComicPage props', this.props.params)
-    console.log('ComicPage state', this.state)
+    // console.log('ComicPage props', this.props.params)
+    // console.log('ComicPage state', this.state)
 
-    if (this.state.comic && this.state.comic[0]) {
-        var comicView = <Comic comic={this.state.comic[0]} key={this.state.comic[0].id} />
+    var comicView = '';
+    if (this.state.comic) {
+        comicView = <Comic comic={this.state.comic} key={this.state.comic.id} className="col-md-8 col-md-offset-2" displaySize="full" />;
     } else {
-        var comicView = <div><p>Loading...</p></div>
+        comicView = <div className="m-loading"><p>Loading...</p></div>;
     }
+
     return (
-      <div className={'row l-detail col-md-12'}>
+      <div className={'row l-detail'}>
         {comicView}
       </div>
     );

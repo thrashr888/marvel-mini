@@ -113,7 +113,7 @@ var HomePage = React.createClass({
     }
 
     var loadingView = '';
-    if (this.state.comics.loading || this.state.creators.loading) {
+    if (this.state.comics.loading) {
       loadingView = <div className="m-loading"><p>Loading...</p></div>;
     }
 

@@ -29,9 +29,9 @@ var Application = React.createClass({
 
   routes: [
     {keyword: 'homeHub', path: '/', component: HomePage},
-    {keyword: 'comicDetail', path: '/comic/:id', component: ComicPage},
-    {keyword: 'creatorDetail', path: '/creator/:id', component: CreatorPage},
-    {keyword: 'basicDetail', path: '/page/:id', component: BasicPage},
+    {keyword: 'comicDetail', path: '/comics/:id', component: ComicPage},
+    {keyword: 'creatorDetail', path: '/creators/:id', component: CreatorPage},
+    {keyword: 'basicDetail', path: '/pages/:id', component: BasicPage},
     {keyword: 'notFound', path: '*', component: PageNotFoundPage}
   ],
 
@@ -70,12 +70,14 @@ var Application = React.createClass({
     // console.log('app state', this.state)
     var topNav = null;
     if (this.state.componentKeyword !== 'homeHub') {
-      topNav = <div className="header">
-            <ul className="nav nav-pills pull-right">
-                <li className="active"><a href="/">Home</a></li>
-            </ul>
-            <h3 className="text-muted">Marvel Mini</h3>
-        </div>;
+      topNav = (<div className="row m-header--container">
+          <div className="col-md-8 col-md-offset-2 header m-header">
+              <ul className="nav pull-right m-header--nav">
+                  <li className="active m-header--link"><a href="/">Home</a></li>
+              </ul>
+              <h3 className="text-muted m-header--logo"><a href="/">Marvel Mini</a></h3>
+          </div>
+        </div>);
     }
 
     return (
