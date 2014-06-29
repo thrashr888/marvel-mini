@@ -183,6 +183,13 @@ body {
         .m-comic--urls {
             display: none;
         }
+        .m-creator--comics,
+        .m-creator--events,
+        .m-creator--serieses,
+        .m-creator--stories,
+        .m-creator--urls {
+            display: none;
+        }
 
         &:not(.has-image) {
             background-position: left;
@@ -289,7 +296,9 @@ body {
         }
 
         .m-comic--thumbnail,
-        .m-comic--images {
+        .m-comic--images,
+        .m-creator--thumbnail,
+        .m-creator--images {
             img {
                 width: 100%;
             }
@@ -302,7 +311,8 @@ body {
             box-shadow: 5px 5px 0 rgba(0,0,0,0.5);
         }
 
-        .m-comic--meta {
+        .m-comic--meta,
+        .m-creator--meta {
             dt {
                 .make-sm-column(4);
             }
@@ -311,11 +321,16 @@ body {
             }
         }
 
-        .m-comic--description {
+        .m-comic--description,
+        .m-creator--description {
             margin-bottom: 20px;
         }
 
-        .m-comic--creators {
+        .m-comic--creators,
+        .m-creator--comics,
+        .m-creator--events,
+        .m-creator--series,
+        .m-creator--stories {
             ul {
                 a {
                     color: white;
@@ -417,7 +432,10 @@ body {
     .m-hero .m-hero--block .m-hero--title {
         font-size: 90px;
     }
-    .l-detail .m-comic .m-comic--images {
+    .l-detail .m-comic .m-comic--images,
+    .l-detail .m-comic .m-comic--thumbnail,
+    .l-detail .m-creator .m-creator--images,
+    .l-detail .m-creator .m-creator--thumbnail {
         left: -50px;
     }
 }

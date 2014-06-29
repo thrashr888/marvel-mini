@@ -52,8 +52,8 @@ var ComicPage = React.createClass({
   },
 
   render: function () {
-    console.log('ComicPage props', this.props.params)
-    console.log('ComicPage state', this.state)
+    // console.log('ComicPage props', this.props.params)
+    // console.log('ComicPage state', this.state)
 
     var featuredComicList = this.state.featuredComics.comics.map(function (comic, index) {
       return <Comic comic={comic} className="col-lg-4 col-md-6 col-sm-12" />;

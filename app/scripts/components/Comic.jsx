@@ -77,7 +77,7 @@ var Comic = React.createClass({
       <div className={'m-comic--container ' + this.props.className + (this.props.displaySize === 'full' ? ' l-fullWidth' : '')}>
         <div className="m-comic" style={{backgroundImage: 'url(' + item.thumbnail.path + '.' + item.thumbnail.extension + ')'}}>
 
-          {images ? <div className="m-comic--images col-sm-4">{jumboImage}</div> : <div className="m-comic--thumbnail col-sm-3">{thumbnail}</div>}
+          {images ? <div className="m-comic--images col-sm-4">{jumboImage}</div> : <div className="m-comic--thumbnail col-sm-4">{thumbnail}</div>}
 
           <div className="m-comic--series col-sm-8">{item.series.name + (item.issueNumber ? ' #' + item.issueNumber : '')}</div>
 

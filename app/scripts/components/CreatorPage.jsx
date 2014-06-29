@@ -40,9 +40,19 @@ var CreatorPage = React.createClass({
       });
   },
 
+  componentWillReceiveProps: function(nextProps) {
+    // we might get a new id to switch to
+    if (nextProps.params.id && nextProps.params.id !== this.props.params.id) {
+      var flux = this.getFlux();
+      this.setState({
+        creator: flux.store('CreatorStore').getCreator(nextProps.params.id)
+      });
+    }
+  },
+
   render: function () {
-    // console.log('CreatorPage props', this.props.params)
-    // console.log('CreatorPage state', this.state)
+    console.log('CreatorPage props', this.props.params)
+    console.log('CreatorPage state', this.state)
 
     var creatorView = '';
     if (this.state.creator && this.state.creator) {
@@ -52,8 +62,11 @@ var CreatorPage = React.createClass({
     }
 
     return (
-      <div className={'row l-detail'}>
-        {creatorView}
+
+      <div className="l-page l-page--detail">
+        <div className={'row l-detail'}>
+          {creatorView}
+        </div>
       </div>
     );
   }
