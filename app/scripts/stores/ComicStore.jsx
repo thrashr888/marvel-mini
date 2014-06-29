@@ -11,7 +11,8 @@ var Config = require('../config.jsx');
 var ComicStore = Fluxxor.createStore({
   actions: {
     'ADD_COMICS': 'onAddComics',
-    'GET_COMICS': 'onGetComics'
+    'GET_COMICS': 'onGetComics',
+    'GET_COMIC': 'onGetComic'
   },
 
   endpoint: '/v1/public/comics',
@@ -66,7 +67,7 @@ var ComicStore = Fluxxor.createStore({
 
   onGetComic: function onGetComic(id) {
     var path = this.endpoint + '/' + id;
-    var url = Config.marvelApiEndpoint + path + '&apikey=' + Config.marvelUserKey;
+    var url = Config.marvelApiEndpoint + path + '?apikey=' + Config.marvelUserKey;
     this.loading = true;
     this.emit('change');
 
@@ -74,7 +75,7 @@ var ComicStore = Fluxxor.createStore({
       url: url,
       dataType: 'json',
       success: function(res) {
-        console.log('comics res', res)
+        console.log('comic res', res)
         this.loading = false;
         this.emit('change');
         this.onAddComics({comics: res.data.results});

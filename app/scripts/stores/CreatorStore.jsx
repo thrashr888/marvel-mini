@@ -11,7 +11,8 @@ var Config = require('../config.jsx');
 var CreatorStore = Fluxxor.createStore({
   actions: {
     'ADD_CREATORS': 'onAddCreators',
-    'GET_CREATORS': 'onGetCreators'
+    'GET_CREATORS': 'onGetCreators',
+    'GET_CREATOR': 'onGetCreator'
   },
 
   endpoint: '/v1/public/creators',
@@ -46,6 +47,29 @@ var CreatorStore = Fluxxor.createStore({
       dataType: 'json',
       success: function(res) {
         console.log('creators res', res)
+        this.loading = false;
+        this.emit('change');
+        this.onAddCreators({creators: res.data.results});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(payload.url, status, err.toString());
+        this.loading = false;
+        this.emit('change');
+      }.bind(this)
+    });
+  },
+
+  onGetCreator: function onGetCreator(id) {
+    var path = this.endpoint + '/' + id;
+    var url = Config.marvelApiEndpoint + path + '?apikey=' + Config.marvelUserKey;
+    this.loading = true;
+    this.emit('change');
+
+    $.ajax({
+      url: url,
+      dataType: 'json',
+      success: function(res) {
+        console.log('creator res', res)
         this.loading = false;
         this.emit('change');
         this.onAddCreators({creators: res.data.results});

@@ -34,10 +34,7 @@ var CreatorPage = React.createClass({
   },
 
   componentWillMount: function() {
-    this.getFlux().actions.getCreators({
-        page: 1,
-        limit: 24
-      });
+    this.getFlux().actions.getCreator(this.props.params.id);
   },
 
   componentWillReceiveProps: function(nextProps) {
@@ -51,14 +48,14 @@ var CreatorPage = React.createClass({
   },
 
   render: function () {
-    console.log('CreatorPage props', this.props.params)
-    console.log('CreatorPage state', this.state)
+    // console.log('CreatorPage props', this.props.params)
+    // console.log('CreatorPage state', this.state)
 
     var creatorView = '';
     if (this.state.creator && this.state.creator) {
         var creatorView = <Creator creator={this.state.creator} key={this.state.creator.id} className="col-md-8 col-md-offset-2" displaySize="full" />
     } else {
-        creatorView = <div className="m-loading"><p>Loading...</p></div>;
+        creatorView = <div className="m-loading"><p><img src="/images/loading-spin.svg" alt="Loading icon" /><br />Loading…</p></div>;
     }
 
     return (

@@ -4,3 +4,4 @@
 /dist
 /app/bower_components
 /.vagrant/
+npm-debug.log

@@ -16,12 +16,24 @@ var actions = {
     this.dispatch('ADD_CREATORS', {creators: creators});
   },
 
-  getComics: function getComics(payload) {
+  getComics: function getComics(payload, callback) {
+    payload.callback = callback;
     this.dispatch('GET_COMICS', payload);
   },
 
-  getCreators: function getCreators(payload) {
+  getComic: function getComic(payload, callback) {
+    payload.callback = callback;
+    this.dispatch('GET_COMIC', payload);
+  },
+
+  getCreators: function getCreators(payload, callback) {
+    payload.callback = callback;
     this.dispatch('GET_CREATORS', payload);
+  },
+
+  getCreator: function getCreator(payload, callback) {
+    payload.callback = callback;
+    this.dispatch('GET_CREATOR', payload);
   }
 };
 

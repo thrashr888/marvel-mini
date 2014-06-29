@@ -46,7 +46,7 @@ var Comic = React.createClass({
     }
 
     var item = this.props.comic;
-    var thumbnail = item.thumbnail ? <img src={item.thumbnail.path + '.' + item.thumbnail.extension} /> : '';
+    var thumbnail = item.thumbnail ? <div className="m-comic--thumbnail col-sm-4"><img src={item.thumbnail.path + '.' + item.thumbnail.extension} /></div> : '';
 
     this.props.className = this.props.className.replace(' has-image', '');
     if (item.thumbnail && !item.thumbnail.path.match(/image_not_available$/)) {
@@ -54,17 +54,17 @@ var Comic = React.createClass({
     }
 
     var images = item.images.map(function (image, index) {
-      return <img src={image.path + '.' + image.extension} key={index} />;
+      return <img src={image.path + '.' + image.extension} key={'images' + index} />;
     });
     var urls = item.urls.map(function (url, index) {
-      return <a href={url.url} className="btn btn-default" key={index}>{url.type}</a>;
+      return <a href={url.url} className="btn btn-default" key={'urls' + index}>{url.type}</a>;
     });
     var creators = item.creators.items.map(function (creator, index) {
-      return <li><a href={resourceURItoLocal(creator.resourceURI)} key={index}>{creator.name}</a></li>;
+      return <li key={'creators' + index}><a href={resourceURItoLocal(creator.resourceURI)}>{creator.name}</a></li>;
     });
 
     var textObjects = item.textObjects.map(function (text, index) {
-      return <p key={index}>{text.text}</p>
+      return <p key={'textObjects' + index}>{text.text}</p>
     });
 
     if (this.props.displaySize === 'full' && images[this.state.jumboIndex]) {
@@ -77,7 +77,7 @@ var Comic = React.createClass({
       <div className={'m-comic--container ' + this.props.className + (this.props.displaySize === 'full' ? ' l-fullWidth' : '')}>
         <div className="m-comic" style={{backgroundImage: 'url(' + item.thumbnail.path + '.' + item.thumbnail.extension + ')'}}>
 
-          {images ? <div className="m-comic--images col-sm-4">{jumboImage}</div> : <div className="m-comic--thumbnail col-sm-4">{thumbnail}</div>}
+          {images && images[0] ? <div className="m-comic--images col-sm-4">{jumboImage}</div> : thumbnail}
 
           <div className="m-comic--series col-sm-8">{item.series.name + (item.issueNumber ? ' #' + item.issueNumber : '')}</div>
 

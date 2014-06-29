@@ -35,6 +35,7 @@ var ComicPage = React.createClass({
   },
 
   componentWillMount: function() {
+    this.getFlux().actions.getComic(this.props.params.id);
     this.getFlux().actions.getComics({
         page: 1,
         limit: 24
@@ -56,14 +57,14 @@ var ComicPage = React.createClass({
     // console.log('ComicPage state', this.state)
 
     var featuredComicList = this.state.featuredComics.comics.map(function (comic, index) {
-      return <Comic comic={comic} className="col-lg-4 col-md-6 col-sm-12" />;
+      return <Comic comic={comic} className="col-lg-4 col-md-6 col-sm-12" key={comic.id} />;
     });
 
     var comicView = '';
     if (this.state.comic) {
       comicView = <Comic comic={this.state.comic} key={this.state.comic.id} className="col-sm-8 col-sm-offset-2" displaySize="full" />;
     } else {
-      comicView = <div className="m-loading"><p>Loading...</p></div>;
+      comicView = <div className="m-loading"><p><img src="/images/loading-spin.svg" alt="Loading icon" /><br />Loading…</p></div>;
     }
 
     return (

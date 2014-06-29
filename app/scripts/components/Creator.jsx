@@ -29,16 +29,16 @@ var Creator = React.createClass({
     }
 
     var comics = item.comics.items.map(function (comic, index) {
-      return <li><a href={resourceURItoLocal(comic.resourceURI)} key={index}>{comic.name}</a></li>;
+      return <li key={index}><a href={resourceURItoLocal(comic.resourceURI)}>{comic.name}</a></li>;
     });
     var events = item.events.items.map(function (event, index) {
-      return <li><a href={resourceURItoLocal(event.resourceURI, 'http://marvel.com/comics')} key={index}>{event.name}</a></li>;
+      return <li key={index}>{event.name}</li>;
     });
     var serieses = item.series.items.map(function (series, index) {
-      return <li><a href={resourceURItoLocal(series.resourceURI, 'http://marvel.com/comics')} key={index}>{series.name}</a></li>;
+      return <li key={index}>{series.name}</li>;
     });
     var stories = item.stories.items.map(function (story, index) {
-      return <li><a href={resourceURItoLocal(story.resourceURI, 'http://marvel.com/comics')} key={index}>{story.name}</a></li>;
+      return <li key={index}>{story.name}</li>;
     });
     var urls = item.urls.map(function (url, index) {
       return <a href={url.url} className="btn btn-default" key={index}>{url.type}</a>;
