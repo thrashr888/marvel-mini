@@ -54,7 +54,8 @@ var Comic = React.createClass({
     }
 
     var images = item.images.map(function (image, index) {
-      return <img src={image.path + '.' + image.extension} key={'images' + index} />;
+      var url = image.path + '.' + image.extension;
+      return <img src={url} key={'images' + index} />;
     });
     var urls = item.urls.map(function (url, index) {
       return <a href={url.url} className="btn btn-default" key={'urls' + index}>{url.type}</a>;
@@ -95,7 +96,7 @@ var Comic = React.createClass({
               <dt>Format:</dt><dd>{item.format}</dd>
               <dt>Pages:</dt><dd>{item.pageCount}</dd>
               <dt>On sale:</dt><dd title={item.dates[0].date}>{moment(item.dates[0].date, 'YYYY-MM-DD[T]HH:mm:ss.SSSZZ').fromNow()}</dd>
-              <dt>FOC Date:</dt><dd title={item.dates[0].date}>{moment(item.dates[0].date, 'YYYY-MM-DD[T]HH:mm:ss.SSSZZ').format('MMMM d, YYYY')}</dd>
+              <dt>FOC Date:</dt><dd title={item.dates[1].date}>{moment(item.dates[1].date, 'YYYY-MM-DD[T]HH:mm:ss.SSSZZ').format('MMMM d, YYYY')}</dd>
             </dl>
 
             <div className="col-sm-6 m-comic--creators">

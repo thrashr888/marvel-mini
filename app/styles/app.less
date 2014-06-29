@@ -204,6 +204,7 @@ body {
                 text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
                 display: inline;
                 padding: 6px;
+                letter-spacing: 0.05em;
 
                 &:hover {
                     transition: background-color 0.2s ease-in-out;
@@ -231,6 +232,7 @@ body {
                 text-shadow: 1px 1px 0 rgba(50,50,50,0.2);
                 display: inline;
                 padding: 2px;
+                letter-spacing: 0.05em;
             }
 
             position: absolute;
@@ -265,8 +267,7 @@ body {
 }
 
 .l-detail {
-    // min-height: 100%;
-    height: 500px;
+    min-height: 500px;
     background: linear-gradient(to bottom, rgb(44,44,44) 0%, #000 100%);
 
     .m-loading {
@@ -309,9 +310,9 @@ body {
             img {
                 width: 100%;
             }
-            margin-bottom: 20px;
+            margin-bottom: 130px;
             position: relative;
-            left: 0; // this is moved left in a MQ below
+            left: 0; // this is -50px in a MQ below
             padding: 0;
 
             border: 1px solid black;
