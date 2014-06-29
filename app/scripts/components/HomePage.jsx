@@ -63,7 +63,7 @@ var HomePage = React.createClass({
         // only update if there's a good image
         this.forceUpdate();
       }
-    }.bind(this), 2000);
+    }.bind(this), 2500);
   },
 
   componentWillUnmount: function () {
