@@ -1,11 +1,9 @@
 /** @jsx React.DOM **/
 
 var React = require('react/addons');
-require('react-test-utils');
+// require('react-test-utils');
 // or var ReactTestUtils = require('react-test-utils');
-// var test = require('tape');
-// var Player = require('../../js/Player');
-// var sinon = require('sinon');
+var app = require('./app.jsx');
 var ReactTestUtils = React.addons.ReactTestUtils;
 
 // var onMusicAdd = sinon.spy();
