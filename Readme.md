@@ -5,11 +5,11 @@ Marvel Mini is a showcase of Marvel comics and creators. It's a simple ReactJS d
 
 ## Elsewhere
 
-    Github:        https://github.com/thrashr888/marvel-mini
-    Docker Builds: https://registry.hub.docker.com/u/thrashr888/marvel-mini/
-    S3:            http://marvel-mini.s3-website-us-east-1.amazonaws.com/
-    CloudFront:    http://d2kh2gtg6jtpy4.cloudfront.net/
-    API Docs:      http://developer.marvel.com/docs
+- Github:        https://github.com/thrashr888/marvel-mini
+- Docker Builds: https://registry.hub.docker.com/u/thrashr888/marvel-mini/
+- S3:            http://marvel-mini.s3-website-us-east-1.amazonaws.com/
+- CloudFront:    http://d2kh2gtg6jtpy4.cloudfront.net/
+- API Docs:      http://developer.marvel.com/docs
 
 ## Install
 
