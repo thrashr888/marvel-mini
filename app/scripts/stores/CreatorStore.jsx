@@ -98,26 +98,30 @@ var CreatorStore = Fluxxor.createStore({
     }
   },
 
+  sortByDate: function sortByDate(a, b) {
+    return a.modified < b.modified;
+  },
+
   getCreators: function getCreators(page, length) {
     page = (page || 1) - 1;
     var start = length * page,
       end = (length * page) + length;
     return {
-      creators: this.creators.slice(start, end)
+      creators: this.creators.sort(this.sortByDate).slice(start, end)
     };
   },
 
   getFeaturedCreators: function getFeaturedCreators(count) {
     return {
       loading: this.loading,
-      creators: this.creators.slice(0, count || 4)
+      creators: this.creators.sort(this.sortByDate).slice(0, count || 4)
     };
   },
 
   getState: function getState() {
     return {
       loading: this.loading,
-      creators: this.creators
+      creators: this.creators.sort(this.sortByDate)
     };
   }
 });

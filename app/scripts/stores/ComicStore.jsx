@@ -113,7 +113,7 @@ var ComicStore = Fluxxor.createStore({
     var start = length * page,
       end = (length * page) + length;
     return {
-      comics: this.comics.slice(start, end)
+      comics: this.comics.sort(this.sortByDate).slice(start, end)
     };
   },
 
