@@ -61,7 +61,7 @@ var HomePage = React.createClass({
         // only update if there's a good image
         this.forceUpdate();
       }
-    }.bind(this), 1000);
+    }.bind(this), 2000);
   },
 
   loadMoreComics: function (event) {
@@ -112,8 +112,7 @@ var HomePage = React.createClass({
       var jumboStyles = {};
     }
 
-    var loadingView = null;
-    // console.log('loading?', this.state.comics.loading)
+    var loadingView = '';
     if (this.state.comics.loading || this.state.creators.loading) {
       loadingView = <div className="m-loading"><p>Loading...</p></div>;
     }
@@ -121,21 +120,23 @@ var HomePage = React.createClass({
     return (
       <div className="l-page l-page--home">
 
-        <div className="row jumbotron l-featured l-featured--hero" style={jumboStyles}>
-            <h1>Marvel Mini</h1>
-            <p className="lead">A showcase of Marvel comics and creators.</p>
+        <div className={"row jumbotron l-featured m-hero " + (this.state.featuredComics.loading ? 'is-loading' : '')} style={jumboStyles}>
+          <div className="m-hero--block">
+            <h1 className="m-hero--title">Marvel Mini</h1>
+            <p className="lead m-hero--lead">A showcase of Marvel comics and creators.</p>
+          </div>
         </div>
 
-        <div className="row l-list l-featured l-featured--comics">
+        <div className={"row l-list l-featured l-featured--comics " + (this.state.featuredComics.loading ? 'is-loading' : '')}>
           {featuredComicList}
         </div>
 
-        <div className="row l-list l-featured l-featured--creators">
+        <div className={"row l-list l-featured l-featured--creators " + (this.state.creators.loading ? 'is-loading' : '')}>
           <h2 className="col-md-12"><span>Latest Creators</span></h2>
           {creatorList}
         </div>
 
-        <div className="row l-list">
+        <div className={"row l-list " + (this.state.comics.loading && !this.state.comics.comics ? 'is-loading' : '')}>
           <h2 className="col-md-12"><span>Latest Comics</span></h2>
           {comicList}
         </div>

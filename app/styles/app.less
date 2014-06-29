@@ -1,4 +1,6 @@
 
+@import url(http://fonts.googleapis.com/css?family=Oswald:400,700);
+
 h2 {
     border-bottom: 1px solid grey;
     margin-bottom: 33px;
@@ -45,7 +47,7 @@ body {
     margin-bottom: 55px;
 }
 
-.l-featured--hero {
+.m-hero {
     color: white;
     text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
     font-style: italic;
@@ -57,30 +59,34 @@ body {
     border-top: 12px solid rgb(33,33,33);
     border-bottom: 12px solid rgb(33,33,33);
 
-    &:before {
-        background: linear-gradient(white, black);
-        z-index:-1;
-        position:absolute;
-        left:0;
-        top:0;
-        opacity:0.4;
+    padding-top: 95px;
+    padding-bottom: 95px;
+
+    transition: background-image 0.5s ease-in-out,
+        opacity 0.5s ease-in-out;
+
+    &.is-loading {
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
     }
 
-    padding-top: 135px;
-    padding-bottom: 135px;
+    .m-hero--block {
+        // background-color: rgba(0,0,0,0.8);
+        display: inline-block;
+        padding: 0 50px 20px;
+        border-radius: 2px;
 
-    transition: background-image 0.2s ease-in-out;
-
-    h1 {
-        font-size: 130px;
-        text-transform: uppercase;
-        font-weight: bold;
-        font-style: italic;
+        .m-hero--title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 90px;
+            text-transform: uppercase;
+            font-weight: bold;
+            font-style: italic;
+        }
     }
 }
 
 .l-list {
-    .make-row();
 
     h2 {
         background-color: black;
@@ -95,11 +101,25 @@ body {
         }
     }
 
+    transition: opacity 0.5s ease-in-out;
+
+    &.is-loading {
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+    }
+
     &.l-featured--comics {
         .m-comic {
             height: 255px;
         }
         margin-top: 45px;
+
+        transition: opacity 0.5s ease-in-out;
+
+        &.is-loading {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
     }
 
     &.l-featured--creators {
@@ -123,6 +143,14 @@ body {
             border: 1px solid white;
             box-shadow: 5px 5px 0 rgb(255,255,255);
         }
+
+        opacity: 1;
+        transition: opacity 0.5s ease-in-out;
+
+        &.is-loading {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
     }
 
     .m-comic--container,
@@ -132,7 +160,6 @@ body {
 
     .m-comic,
     .m-creator {
-
         height: 389px;
         padding: 0px;
         margin: 0 33px 0;
@@ -152,15 +179,17 @@ body {
         .m-comic--title {
 
             .m-comic--title--text {
-                background-color: rgba(255,255,0,0.8);
+                transition: background-color 0.2s ease-in-out;
+                background-color: rgba(33,33,33,0.8);
                 color: rgba(255,255,255,1);
                 text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
                 display: inline;
                 padding: 6px;
 
                 &:hover {
-                    background-color: black;
-                    text-shadow: none;
+                    transition: background-color 0.2s ease-in-out;
+                    background-color: rgba(255,255,0,0.8);
+                    // text-shadow: none;
                     text-decoration: none;
                 }
             }
@@ -233,5 +262,30 @@ body {
 
     .m-footer {
         text-align: right;
+    }
+}
+
+
+/* Extra small devices (phones, less than 768px) */
+/* No media query since this is the default in Bootstrap */
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: @screen-sm-min) {
+    .m-hero .m-hero--block .m-hero--title {
+        font-size: 90px;
+    }
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: @screen-md-min) {
+    .m-hero .m-hero--block .m-hero--title {
+        font-size: 180px;
+    }
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: @screen-lg-min) {
+    .m-hero .m-hero--block .m-hero--title {
+        font-size: 180px;
     }
 }
