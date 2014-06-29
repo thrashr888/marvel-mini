@@ -3,7 +3,12 @@
 var gulp = require('gulp');
 var crypto = require('crypto');
 var env = require('node-env-file');
-env(__dirname + '/.env');
+
+try {
+    env(__dirname + '/.env');
+} catch (e) {
+    env(__dirname + '/.env.example');
+}
 
 // Load plugins
 var $ = require('gulp-load-plugins')();
