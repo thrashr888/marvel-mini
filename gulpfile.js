@@ -30,7 +30,7 @@ gulp.task('styles', function () {
 
 // Scripts
 gulp.task('scripts', function () {
-    return gulp.src('app/scripts/app.jsx', { read: false })
+    return gulp.src(['app/scripts/app.jsx', 'app/scripts/test.jsx'], { read: false })
         .pipe($.browserify({
             // insertGlobals: true,
             // transform: ['reactify', {'harmony': true}],
@@ -44,7 +44,9 @@ gulp.task('scripts', function () {
             harmony: true,
             // debug: !gulp.env.production
         }))
-        .pipe($.rename('app.js'))
+        .pipe($.rename(function (path) {
+            path.extname = '.js';
+        }))
         // .pipe($.jshint('.jshintrc'))
         // .pipe($.jshint.reporter('default'))
         .pipe(gulp.dest('dist/scripts'))
