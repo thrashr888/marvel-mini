@@ -20,6 +20,7 @@ body {
         background: @dark-gradient;
     }
     border-radius: 1px;
+    margin-right: 12px;
 
     text-transform: uppercase;
     font-style: italic;
@@ -44,7 +45,6 @@ body {
 }
 
 .l-page {
-    margin-bottom: 55px;
 }
 
 .m-hero {
@@ -232,8 +232,8 @@ body {
             text-align: right;
         }
 
-        .m-comic--image,
-        .m-creator--image {
+        .m-comic--thumbnail,
+        .m-creator--thumbnail {
             img {
                 width: 100%;
                 border-radius: 3px;
@@ -259,14 +259,91 @@ body {
     .m-comic--container,
     .m-creator--container {
         background-color: white;
+        padding-top: 30px;
+        padding-bottom: 60px;
     }
 
     .m-comic,
     .m-creator {
-        .make-md-column(12);
-
         background: none !important;
         background-repeat: no-repeat;
+
+        .m-comic--title,
+        .m-creator--title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 66px;
+            font-weight: bold;
+            font-style: italic;
+            margin-bottom: 30px;
+
+            a {
+                color: black;
+                &:hover {
+                    text-decoration: none;
+                }
+            }
+        }
+
+        .m-comic--thumbnail,
+        .m-comic--images {
+            img {
+                width: 100%;
+            }
+            margin-bottom: 20px;
+            position: relative;
+            left: -50px;
+        }
+
+        .m-comic--meta {
+            dt {
+                .make-sm-column(4);
+            }
+            dd {
+                .make-sm-column(8);
+            }
+        }
+
+        .m-comic--description {
+            margin-bottom: 20px;
+        }
+
+        .m-comic--creators {
+            ul {
+                a {
+                    color: white;
+                    text-decoration: underline;
+
+                    &:hover {
+                        text-decoration: none;
+                    }
+                }
+            }
+        }
+
+        .l-meta {
+            background-color: black;
+            color: white;
+            padding-bottom: 30px;
+
+            a {
+                // color: white;
+            }
+        }
+    }
+}
+
+.l-page--detail {
+    .l-list--container {
+        background-color: black;
+    }
+
+    .l-list {
+        background-color: white;
+        margin-top: 0;
+
+        h2 {
+            // background-color: white;
+        }
     }
 }
 

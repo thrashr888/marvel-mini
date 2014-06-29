@@ -29,6 +29,7 @@ var CreatorPage = React.createClass({
     // we'll use the state of the store as our entire state here.
     return {
       creator: flux.store('CreatorStore').getCreator(this.props.params.id),
+      loading: flux.store('CreatorStore').getState().loading
     };
   },
 

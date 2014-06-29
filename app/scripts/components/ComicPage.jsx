@@ -28,7 +28,9 @@ var ComicPage = React.createClass({
     // Normally we'd use one key per store, but we only have one store, so
     // we'll use the state of the store as our entire state here.
     return {
+      featuredComics: flux.store('ComicStore').getFeaturedComics(12),
       comic: flux.store('ComicStore').getComic(this.props.params.id),
+      loading: flux.store('ComicStore').getState().loading
     };
   },
 
@@ -40,19 +42,32 @@ var ComicPage = React.createClass({
   },
 
   render: function () {
-    // console.log('ComicPage props', this.props.params)
-    // console.log('ComicPage state', this.state)
+    console.log('ComicPage props', this.props.params)
+    console.log('ComicPage state', this.state)
+
+    var featuredComicList = this.state.featuredComics.comics.map(function (comic, index) {
+      return <Comic comic={comic} className="col-lg-4 col-md-6 col-sm-12" />;
+    });
 
     var comicView = '';
     if (this.state.comic) {
-        comicView = <Comic comic={this.state.comic} key={this.state.comic.id} className="col-md-8 col-md-offset-2" displaySize="full" />;
+      comicView = <Comic comic={this.state.comic} key={this.state.comic.id} className="col-sm-8 col-sm-offset-2" displaySize="full" />;
     } else {
-        comicView = <div className="m-loading"><p>Loading...</p></div>;
+      comicView = <div className="m-loading"><p>Loading...</p></div>;
     }
 
     return (
-      <div className={'row l-detail'}>
-        {comicView}
+      <div className="l-page l-page--detail">
+        <div className={'row l-detail'}>
+          {comicView}
+        </div>
+
+        <div className="row l-list--container">
+          <div className={"col-sm-8 col-sm-offset-2 l-list l-featured--comics " + (this.state.featuredComics.loading ? 'is-loading' : '')}>
+            <h2 className="col-sm-12"><span>Featured Comics</span></h2>
+            {featuredComicList}
+          </div>
+        </div>
       </div>
     );
   }

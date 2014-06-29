@@ -86,10 +86,10 @@ var HomePage = React.createClass({
 
     if (this.state.comics) {
       var featuredComicList = this.state.featuredComics.comics.map(function (comic, index) {
-        return <Comic comic={comic} className="col-lg-6 col-lg-6 col-sm-12" />;
+        return <Comic comic={comic} className="col-lg-6 col-md-6 col-sm-12" />;
       });
       var comicList = this.state.comics.comics.map(function (comic, index) {
-        return <Comic comic={comic} className="col-lg-3 col-lg-4 col-sm-6" />;
+        return <Comic comic={comic} className="col-lg-3 col-md-4 col-sm-6" />;
       });
     } else {
       return <div><p>Loading...</p></div>;
@@ -97,7 +97,7 @@ var HomePage = React.createClass({
 
     if (this.state.creators) {
       var creatorList = this.state.creators.creators.map(function (creator, index) {
-        return <Creator creator={creator} className="col-lg-2 col-lg-3 col-sm-4" />;
+        return <Creator creator={creator} className="col-lg-2 col-md-3 col-sm-4" />;
       });
     } else {
       return <div><p>Loading...</p></div>;

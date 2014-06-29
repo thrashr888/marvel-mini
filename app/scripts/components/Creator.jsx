@@ -26,7 +26,7 @@ var Creator = React.createClass({
       <div className={'m-creator--container ' + this.props.className}>
         <div className="m-creator" style={{backgroundImage: 'url(' + item.thumbnail.path + '.' + item.thumbnail.extension + ')'}}>
           <h3 className="m-creator--title"><a className="m-creator--title--text" href={'/creators/' + item.id}>{item.fullName}</a></h3>
-          <div className="m-creator--image">{thumbnail}</div>
+          <div className="m-creator--thumbnail">{thumbnail}</div>
         </div>
       </div>
     );

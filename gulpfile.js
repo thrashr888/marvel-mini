@@ -141,27 +141,49 @@ var hash = crypto.createHash('md5')
     .digest('hex');
 var stubbyData = [
     {
-    request: {
-      url: '^/v1/public/comics$',
-      method: 'GET'
+        request: {
+          url: '^/v1/public/comics$',
+          method: 'GET'
+        },
+        response: process.env.MARVEL_API_ENDPOINT +
+            '/v1/public/comics?orderBy=-focDate&limit=48' +
+            '&ts=' + ts +
+            '&apikey=' + process.env.MARVEL_PUBLIC_KEY +
+            '&hash=' + hash
     },
-    response: process.env.MARVEL_API_ENDPOINT +
-        '/v1/public/comics?orderBy=-focDate&limit=48' +
-        '&ts=' + ts +
-        '&apikey=' + process.env.MARVEL_PUBLIC_KEY +
-        '&hash=' + hash
-  },
-  {
-    request: {
-      url: '^/v1/public/creators',
-      method: 'GET'
+    {
+        request: {
+          url: '^/v1/public/comics/(\\d+)$',
+          method: 'GET'
+        },
+        response: process.env.MARVEL_API_ENDPOINT +
+            '/v1/public/comics/48622' +
+            '?ts=' + ts +
+            '&apikey=' + process.env.MARVEL_PUBLIC_KEY +
+            '&hash=' + hash
     },
-    response: process.env.MARVEL_API_ENDPOINT +
-        '/v1/public/creators?orderBy=-modified&limit=48' +
-        '&ts=' + ts +
-        '&apikey=' + process.env.MARVEL_PUBLIC_KEY +
-        '&hash=' + hash
-  }
+    {
+        request: {
+          url: '^/v1/public/creators$',
+          method: 'GET'
+        },
+        response: process.env.MARVEL_API_ENDPOINT +
+            '/v1/public/creators?orderBy=-modified&limit=48' +
+            '&ts=' + ts +
+            '&apikey=' + process.env.MARVEL_PUBLIC_KEY +
+            '&hash=' + hash
+    },
+    {
+        request: {
+          url: '^/v1/public/creators/(\\d+)$',
+          method: 'GET'
+        },
+        response: process.env.MARVEL_API_ENDPOINT +
+            '/v1/public/creators/11680' +
+            '?ts=' + ts +
+            '&apikey=' + process.env.MARVEL_PUBLIC_KEY +
+            '&hash=' + hash
+    }
 ];
 
 gulp.task('stubby', function() {
