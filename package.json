@@ -18,7 +18,7 @@
     "url": "https://github.com/thrashr888/marvel-mini.git"
   },
   "scripts": {
-    "test": "node dist/scripts/test.js"
+    "test": "gulp test"
   },
   "devDependencies": {
     "connect-modrewrite": "^0.7.6",
@@ -32,6 +32,7 @@
     "gulp-imagemin": "~0.6.1",
     "gulp-jade": "~0.6.0",
     "gulp-jshint": "~1.6.3",
+    "gulp-karma": "0.0.4",
     "gulp-less": "~1.2.4",
     "gulp-load-plugins": "~0.5.0",
     "gulp-plumber": "~0.6.3",

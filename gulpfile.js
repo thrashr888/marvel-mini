@@ -68,7 +68,6 @@ gulp.task('jade', function () {
 });
 
 
-
 // HTML
 gulp.task('html', function () {
     return gulp.src('app/*.html')
@@ -108,6 +107,17 @@ gulp.task('bundle', ['styles', 'scripts', 'images', 'bower'], function () {
         .pipe(gulp.dest('dist'));
 });
 
+gulp.task('test', ['build'], function () {
+  return gulp.src('dist/scripts/test.js', {read: false})
+    .pipe($.karma({
+      configFile: 'karma.conf.js',
+      action: 'run'
+    }))
+    .on('error', function(err) {
+      // Make sure failed tests cause gulp to exit non-zero
+      throw err;
+    });
+});
 
 // Build
 gulp.task('build', ['html', 'bundle', 'images']);
