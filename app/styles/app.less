@@ -47,6 +47,10 @@ body {
 .l-page {
 }
 
+.l-content {
+    // margin-bottom: 55px;
+}
+
 .m-hero {
     color: white;
     text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
@@ -291,7 +295,11 @@ body {
             }
             margin-bottom: 20px;
             position: relative;
-            left: -50px;
+            left: 0; // this is moved left in a MQ below
+            padding: 0;
+
+            border: 1px solid black;
+            box-shadow: 5px 5px 0 rgba(0,0,0,0.5);
         }
 
         .m-comic--meta {
@@ -408,6 +416,9 @@ body {
 @media (min-width: @screen-sm-min) {
     .m-hero .m-hero--block .m-hero--title {
         font-size: 90px;
+    }
+    .l-detail .m-comic .m-comic--images {
+        left: -50px;
     }
 }
 

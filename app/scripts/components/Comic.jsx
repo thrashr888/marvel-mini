@@ -19,18 +19,18 @@ var Comic = React.createClass({
   mixins: [FluxChildMixin],
 
   componentDidMount: function() {
-    setInterval(function () {
-      this.state.jumboIndex++;
-      if (!this.props.comic.images[this.state.jumboIndex]) {
-        this.state.jumboIndex = 0;
-      }
+    // setInterval(function () {
+    //   this.state.jumboIndex++;
+    //   if (!this.props.comic.images[this.state.jumboIndex]) {
+    //     this.state.jumboIndex = 0;
+    //   }
 
-      if (this.props.comic.images[this.state.jumboIndex] &&
-        !this.props.comic.images[this.state.jumboIndex].path.match(/image_not_available$/)) {
-        // only update if there's a good image
-        this.forceUpdate();
-      }
-    }.bind(this), 2000);
+    //   if (this.props.comic.images[this.state.jumboIndex] &&
+    //     !this.props.comic.images[this.state.jumboIndex].path.match(/image_not_available$/)) {
+    //     // only update if there's a good image
+    //     this.forceUpdate();
+    //   }
+    // }.bind(this), 2000);
   },
 
   getInitialState: function() {
@@ -74,13 +74,14 @@ var Comic = React.createClass({
     }
 
     return (
-      <div className={'m-comic--container ' + this.props.className + (this.props.displaySize ? ' l-fullWidth' : '')}>
+      <div className={'m-comic--container ' + this.props.className + (this.props.displaySize === 'full' ? ' l-fullWidth' : '')}>
         <div className="m-comic" style={{backgroundImage: 'url(' + item.thumbnail.path + '.' + item.thumbnail.extension + ')'}}>
 
           {images ? <div className="m-comic--images col-sm-4">{jumboImage}</div> : <div className="m-comic--thumbnail col-sm-3">{thumbnail}</div>}
 
           <div className="m-comic--series col-sm-8">{item.series.name + (item.issueNumber ? ' #' + item.issueNumber : '')}</div>
-          <h3 className="m-comic--title col-sm-8"><a className="m-comic--title--text" href={'/comics/' + item.id}>{item.title}</a></h3>
+
+          <h3 className={"m-comic--title " + (this.props.displaySize === 'full' ? 'col-sm-8' : '')}><a className="m-comic--title--text" href={'/comics/' + item.id} onClick={page(this.href)}>{item.title}</a></h3>
 
           <div className="m-comic--description col-sm-8">
             {textObjects}

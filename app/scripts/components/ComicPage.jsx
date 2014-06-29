@@ -41,6 +41,16 @@ var ComicPage = React.createClass({
       });
   },
 
+  componentWillReceiveProps: function(nextProps) {
+    // we might get a new id to switch to
+    if (nextProps.params.id && nextProps.params.id !== this.props.params.id) {
+      var flux = this.getFlux();
+      this.setState({
+        comic: flux.store('ComicStore').getComic(nextProps.params.id)
+      });
+    }
+  },
+
   render: function () {
     console.log('ComicPage props', this.props.params)
     console.log('ComicPage state', this.state)

@@ -53,10 +53,11 @@ var Application = React.createClass({
             config={Config}
             flux={self.props.flux} />
         });
+        window.scrollTo(0,0);
       });
     });
 
-    page();
+    page.start();
   },
 
   getInitialState: function() {

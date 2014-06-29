@@ -23,6 +23,8 @@ var HomePage = React.createClass({
     'CreatorStore'
   )],
 
+  interval: null,
+
   getStateFromFlux: function() {
     var flux = this.getFlux();
     // Normally we'd use one key per store, but we only have one store, so
@@ -50,7 +52,7 @@ var HomePage = React.createClass({
   },
 
   componentDidMount: function() {
-    setInterval(function () {
+    this.interval = setInterval(function () {
       this.state.jumboIndex++;
       if (!this.state.comics.comics[this.state.jumboIndex]) {
         this.state.jumboIndex = 0;
@@ -62,6 +64,10 @@ var HomePage = React.createClass({
         this.forceUpdate();
       }
     }.bind(this), 2000);
+  },
+
+  componentWillUnmount: function () {
+    clearInterval(this.interval);
   },
 
   loadMoreComics: function (event) {
@@ -141,7 +147,7 @@ var HomePage = React.createClass({
           {comicList}
         </div>
 
-        <div className="row">
+        <div className="row l-content" style={{marginBottom: '45px'}}>
           <div className="col-md-6 col-md-offset-3">
             {loadingView}
             <a onClick={this.loadMoreComics} href="#" className="btn btn-default btn-lg btn-block">Load More</a>
