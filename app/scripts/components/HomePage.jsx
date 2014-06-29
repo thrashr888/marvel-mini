@@ -149,8 +149,7 @@ var HomePage = React.createClass({
 
         <div className="row l-content" style={{marginBottom: '45px'}}>
           <div className="col-md-6 col-md-offset-3">
-            {loadingView}
-            <a onClick={this.loadMoreComics} href="#" className="btn btn-default btn-lg btn-block">Load More</a>
+            {loadingView ? loadingView : <a onClick={this.loadMoreComics} href="#" className="btn btn-default btn-lg btn-block">Load More</a>}
           </div>
         </div>
 
