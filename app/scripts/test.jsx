@@ -1,4 +1,5 @@
 /** @jsx React.DOM **/
+/*globals describe, beforeEach*/
 
 /*
     Polyfill required for Function.bind() in PhantomJS.
@@ -32,54 +33,45 @@ if (!Function.prototype.bind) {
 }
 
 var React = require('react/addons');
+// var jasmine = require('karma-jasmine');
 // require('react-test-utils');
-// or var ReactTestUtils = require('react-test-utils');
+// var ReactTestUtils = require('react-test-utils');
 
-module('TestSuiteName', {
-    setup: function() {
-        'use strict';
-        var f = jasmine.getFixtures();
-        f.fixturesPath = 'base';
-        f.load('src/test/js/TestFixture.html');
+// var f = jasmine.getFixtures();
+// f.fixturesPath = 'base';
+// f.load('../index.html');
+// var ReactTestUtils = require('react-test-utils');
 
-        var app = require('./app.jsx');
-        var ReactTestUtils = React.addons.ReactTestUtils;
-    },
-    teardown: function() {
-        'use strict';
-        var f = jasmine.getFixtures();
-        f.cleanUp();
-        f.clearCache();
-    }
+var actions = require('./actions.jsx');
+var config = require('./config.jsx');
+
+var Application = require('./components/Application.jsx');
+var ComicStore = require('./stores/ComicStore.jsx');
+var CreatorStore = require('./stores/CreatorStore.jsx');
+
+
+
+describe('Label Test',function(){
+    'use strict';
+
+    beforeEach(function() {
+        ReactTestUtils = require('react-test-utils');
+    });
+
+    it('Check Text Assignment', function () {
+        var label = <p>Some Text We Need for Test</p>;
+        console.log(ReactTestUtils)
+        // ReactTestUtils.renderIntoDocument(label);
+        // expect(label.refs.p).toBeDefined();
+        // expect(label.refs.p.props.children).toBe('Some Text We Need for Test')
+    });
+
+    it('Click', function () {
+        var label  = <p>Some Text We Need to Test</p>;
+        // ReactTestUtils.renderIntoDocument(label);
+
+        // ReactTestUtils.Simulate.click(label.refs.p);
+        // expect(label.refs.p.props.children).toBe('Text After Click');
+    });
+
 });
-
-// var onMusicAdd = sinon.spy();
-
-// test('Player', function(t) {
-//   var player = <Player test='testing' />;
-//   ReactTestUtils.renderIntoDocument(player);
-//   t.plan(1);
-//   t.equal(player.props.test, 'testing', 'test property should exists');
-// });
-
-// test('Player: simulate drag music', function(t) {
-//   var player = <Player test='testing' onMusicAdd={onMusicAdd}/>;
-//   var files = [
-//     {name: 'test.mp3', type: 'audio/mp3'}
-//   ];
-//   var fakeEvt = {
-//     dataTransfer: {
-//       files: files
-//     }
-//   };
-//   ReactTestUtils.renderIntoDocument(player);
-
-//   t.plan(3);
-
-//   ReactTestUtils.Simulate.drop(player.refs.el);
-//   t.notOk(onMusicAdd.called, 'onMusicAdd should not be called');
-
-//   ReactTestUtils.Simulate.drop(player.refs.el, fakeEvt);
-//   t.ok(onMusicAdd.called, 'onMusicAdd should be called');
-//   t.ok(onMusicAdd.calledWith(files), 'onMusicAdd shoule be called with mock files');
-// });

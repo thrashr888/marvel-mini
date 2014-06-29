@@ -1,8 +1,6 @@
-/*globals karma, module*/
+/*globals module*/
 
 // Karma configuration
-
-var karma = require('karma');
 
 module.exports = function (config) {
     'use strict';
@@ -26,7 +24,6 @@ module.exports = function (config) {
             files: [
                 // these are served via the file server but not included or loaded
                 // these files are meant to be loaded via requirejs
-                'index.html',
                 'scripts/test.js',
                 {pattern: '*.html', watched: true, served: true, included: false}
             ],
