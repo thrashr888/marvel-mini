@@ -8,6 +8,8 @@ var React = require('react/react.js');
 var Fluxxor = require('fluxxor/index.js');
 var FluxChildMixin = Fluxxor.FluxChildMixin(React);
 
+var Comic = require('./Comic.jsx');
+
 /**
  * Creator View
  */
@@ -31,6 +33,17 @@ var Creator = React.createClass({
     var comics = item.comics.items.map(function (comic, index) {
       return <li key={'cr-comics' + index}><a href={resourceURItoLocal(comic.resourceURI)}>{comic.name}</a></li>;
     });
+
+    var flux = this.getFlux();
+    var featuredComics = item.comics.items.map(function (comic, index) {
+      var id = parseInt(comic.resourceURI.replace('http://gateway.marvel.com/v1/public/comics/', ''));
+      var fullComic = flux.store('ComicStore').getComic(id);
+      // console.log('creator.fullComic', comic, fullComic)
+      if (fullComic) {
+        return <Comic comic={fullComic} className="col-lg-6 col-md-6 col-sm-12" key={'cr-comics-feat' + index + fullComic.id} />;
+      }
+    });
+
     var events = item.events.items.map(function (event, index) {
       return <li key={'cr-events' + index}>{event.name}</li>;
     });
@@ -51,6 +64,11 @@ var Creator = React.createClass({
           <div className="m-creator--thumbnail col-sm-4">{thumbnail}</div>
 
           <h3 className={"m-creator--title " + (this.props.displaySize === 'full' ? 'col-sm-8' : '')}><a className="m-creator--title--text" href={'/creators/' + item.id}>{item.fullName}</a></h3>
+
+          {featuredComics && featuredComics[0] ? <div className="m-creator--featured-comics row l-list col-md-12">
+            <h4>Featured Comics</h4>
+            {featuredComics}
+          </div> : ''}
 
           <div className="l-meta col-sm-12">
             {comics && comics[0] ? <div className="col-sm-6 m-creator--comics">

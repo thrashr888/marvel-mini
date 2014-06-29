@@ -30,8 +30,17 @@ var CreatorStore = Fluxxor.createStore({
       // modified, resourceURI, series, stories, suffix, thumbnail, urls
       // this.creators.push(creator);
       this.creators[creator.id] = creator;
+      // this.getCreatorComics(creator.comics.items);
     }
     this.emit('change');
+  },
+
+  getCreatorComics: function getCreatorComics(comics) {
+    // This is really slow if called on many comics.
+    for (var i in comics) {
+      var id = parseInt(comics[i].resourceURI.replace('http://gateway.marvel.com/v1/public/comics/', ''));
+      this.flux.actions.getComic(id);
+    }
   },
 
   onGetCreators: function onGetDocs(payload) {
