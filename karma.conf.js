@@ -18,7 +18,7 @@ module.exports = function (config) {
             ],
 
             // base path, that will be used to resolve files and exclude
-            basePath: '',
+            basePath: 'dist',
 
             frameworks: ['jasmine'],
 
@@ -26,7 +26,9 @@ module.exports = function (config) {
             files: [
                 // these are served via the file server but not included or loaded
                 // these files are meant to be loaded via requirejs
-                'dist/scripts/test.js'
+                'index.html',
+                'scripts/test.js',
+                {pattern: '*.html', watched: true, served: true, included: false}
             ],
 
             // list of files to exclude
