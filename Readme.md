@@ -23,6 +23,10 @@ Marvel Mini is a showcase of Marvel comics and creators. It's a simple ReactJS d
     > gulp watch
     > open http://localhost:9000/
 
+## Test
+
+    > gulp test
+
 ## Runtime
 
     > gulp build
