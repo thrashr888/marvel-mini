@@ -279,18 +279,25 @@ body {
     }
 
     &> .m-comic--container,
-    &> .m-creator--container {
+    &> .m-creator--container,
+    &> .m-basic--container {
         background-color: white;
         padding-top: 30px;
         padding-bottom: 60px;
 
+        .m-basic {
+            min-height: 400px;
+        }
+
         .m-comic,
-        .m-creator {
+        .m-creator,
+        .m-basic {
             background: none !important;
             background-repeat: no-repeat;
 
             .m-comic--title,
-            .m-creator--title {
+            .m-creator--title,
+            .m-basic--title {
                 font-family: 'Oswald', sans-serif;
                 font-size: 66px;
                 font-weight: bold;
@@ -435,7 +442,14 @@ body {
     padding-bottom: 22px;
 
     .m-footer {
-        text-align: right;
+        .m-footer--copyright {
+            text-align: right;
+        }
+        .m-footer--links {
+            a {
+                color: rgb(150,150,150);
+            }
+        }
     }
 }
 

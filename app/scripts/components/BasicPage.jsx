@@ -23,9 +23,15 @@ var BasicPage = React.createClass({
     }.bind(this))[0];
 
     return (
-      <div className={'l-page l-page-detail'}>
-        <h2>{page.title}</h2>
-        <div dangerouslySetInnerHTML={{__html: page.text}}></div>
+      <div className="l-page l-page-detail">
+        <div className="row l-detail">
+          <div className="m-basic--container col-sm-8 col-sm-offset-2">
+            <div className="m-basic">
+              <h2 className="m-basic--title col-sm-8 col-sm-offset-2">{page.title}</h2>
+              <div className="m-basic--description col-sm-8 col-sm-offset-2" dangerouslySetInnerHTML={{__html: page.text}}></div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

@@ -89,7 +89,7 @@ var Comic = React.createClass({
           </div>
 
           <div className="l-meta col-sm-12">
-            <dl className="row col-sm-6 m-comic--meta">
+            <dl className="row col-sm-6 m-comic--meta dl-horizontal">
               <h4>More Details</h4>
 
               <dt>Price:</dt><dd>${item.prices[0].price}</dd>
