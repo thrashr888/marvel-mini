@@ -35,7 +35,11 @@ gulp.task('styles', function () {
 
 // Scripts
 gulp.task('scripts', function () {
-    return gulp.src(['app/scripts/app.jsx', 'app/scripts/test.jsx'], { read: false })
+    return gulp.src([
+        'app/scripts/app.jsx',
+        'app/scripts/test.jsx',
+        // 'app/server.jsx'
+        ], { read: false })
         .pipe($.browserify({
             // insertGlobals: true,
             // transform: ['reactify', {'harmony': true}],
@@ -113,6 +117,18 @@ gulp.task('test', ['build'], function () {
       configFile: 'karma.conf.js',
       action: 'run'
     }))
+    .on('error', function(err) {
+      // Make sure failed tests cause gulp to exit non-zero
+      throw err;
+    });
+});
+
+gulp.task('server', ['build'], function () {
+  return gulp.src('dist/scripts/server.js', {read: false})
+    // .pipe($.karma({
+    //   configFile: 'karma.conf.js',
+    //   action: 'run'
+    // }))
     .on('error', function(err) {
       // Make sure failed tests cause gulp to exit non-zero
       throw err;
