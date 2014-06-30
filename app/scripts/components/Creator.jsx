@@ -34,15 +34,14 @@ var Creator = React.createClass({
       return <li key={'cr-comics' + index}><a href={resourceURItoLocal(comic.resourceURI)}>{comic.name}</a></li>;
     });
 
-    var flux = this.getFlux();
     var featuredComics = item.comics.items.map(function (comic, index) {
       var id = parseInt(comic.resourceURI.replace('http://gateway.marvel.com/v1/public/comics/', ''));
-      var fullComic = flux.store('ComicStore').getComic(id);
+      var fullComic = this.getFlux().store('ComicStore').getComic(id);
       // console.log('creator.fullComic', comic, fullComic)
       if (fullComic) {
         return <Comic comic={fullComic} className="col-lg-6 col-md-6 col-sm-12" key={'cr-comics-feat' + index + fullComic.id} />;
       }
-    });
+    }.bind(this));
 
     var events = item.events.items.map(function (event, index) {
       return <li key={'cr-events' + index}>{event.name}</li>;

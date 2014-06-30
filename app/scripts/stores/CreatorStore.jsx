@@ -96,7 +96,7 @@ var CreatorStore = Fluxxor.createStore({
     // console.log('getComic', parseInt(id))
     id = parseInt(id);
     var creators = this.creators.filter(function (creator) {
-        // console.log('getCreator', creator.id, id)
+        // console.log('CreatorStore.getCreator', creator.id, id, creator)
         return (creator.id === id);
       });
     if (!creators) {

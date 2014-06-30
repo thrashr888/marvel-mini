@@ -15,7 +15,7 @@ var BasicPage = React.createClass({
   mixins: [FluxChildMixin],
 
   render: function () {
-    // console.log(this.props.item.input.split('\n').length)
+    // console.log(this.props)
     return (
       <div className={'row l-creator col-md-12'}>
         <h1>BasicPage</h1>

@@ -1,5 +1,5 @@
 /** @jsx React.DOM **/
-/*globals describe, beforeEach*/
+/*globals describe, beforeEach, it*/
 
 /*
     Polyfill required for Function.bind() in PhantomJS.
@@ -57,6 +57,10 @@ var actions = require('./actions.jsx');
 var config = require('./config.jsx');
 
 var Application = require('./components/Application.jsx');
+var Comic = require('./components/Comic.jsx');
+var ComicPage = require('./components/ComicPage.jsx');
+var Creator = require('./components/Creator.jsx');
+var CreatorPage = require('./components/CreatorPage.jsx');
 var ComicStore = require('./stores/ComicStore.jsx');
 var CreatorStore = require('./stores/CreatorStore.jsx');
 
@@ -65,22 +69,28 @@ var stores = {
   CreatorStore: new CreatorStore()
 };
 
-var flux = new Fluxxor.Flux(stores, actions);
+var comicFixtures = require('./tests/comic-fixtures.json');
+var creatorFixtures = require('./tests/creator-fixtures.json');
+var mockComics = comicFixtures.data.results;
+var mockCreators = creatorFixtures.data.results;
+stores.ComicStore.comics = mockComics;
+stores.CreatorStore.creators = mockCreators;
+// console.log('mockCreators', keys, mockCreators)
 
+var flux = new Fluxxor.Flux(stores, actions);
 
 // A simple test case to make sure we're working properly
 var Label = React.createClass({
     handleClick: function(){
+        'use strict';
         console.log('Click');
         this.props.children = 'Text After Click';
         this.setState({liked: false});
     },
-
     render: function () {
+        'use strict';
         console.log('Render');
-        return (
-            <p ref="p" onClick={this.handleClick}>{this.props.children}</p>
-            );
+        return (<p ref="p" onClick={this.handleClick}>{this.props.children}</p>);
     }
 });
 
@@ -107,5 +117,62 @@ describe('Label Test',function(){
         ReactTestUtils.Simulate.click(label.refs.p);
         expect(label.refs.p.props.children).toBe('Text After Click');
     });
+});
 
+describe('Component',function(){
+    'use strict';
+
+    beforeEach(function() {
+        ReactTestUtils = React.addons.TestUtils;
+    });
+
+    it('CreatorStore', function(){
+        var creator1 = flux.store('CreatorStore').getCreator(mockCreators[0].id);
+        expect(creator1).toBeDefined();
+        expect(creator1).toEqual(mockCreators[0]);
+    });
+
+    it('ComicStore', function(){
+        var comic1 = flux.store('ComicStore').getComic(mockComics[0].id);
+        expect(comic1).toBeDefined();
+        expect(comic1).toEqual(mockComics[0]);
+    });
+
+    it('CreatorPage', function(){
+        var params = {id: mockCreators[0].id};
+
+        var creatorPage = <CreatorPage params={params} config={config} flux={flux} />;
+        ReactTestUtils.renderIntoDocument(creatorPage);
+        expect(creatorPage.state.creator).toBeDefined();
+        expect(creatorPage.state.creator.id).toEqual(mockCreators[0].id);
+
+
+        var creatorPage = <CreatorPage params={params} config={config} flux={flux} />;
+        var creatorPageString = React.renderComponentToString(creatorPage);
+        expect(creatorPageString).toMatch(/The ALL-NEW ULTIMATES face off/);
+    });
+
+    // * The FluxChildMixin makes these untestable on their own.
+    // Need to figured out how to pass `this.context.flux` to a child component.
+
+    // it('Creator', function(){
+    //     var creator = <Creator creator={mockCreators[0]} className="col-md-8 col-md-offset-2" displaySize="full" flux={flux} />;
+
+    //     ReactTestUtils.renderIntoDocument(creator);
+    //     console.log(creator)
+    //     expect(creator.refs).toBeDefined();
+
+    //     var creatorString = React.renderComponentToString(creator);
+    //     expect(creatorString).toMatch(/The ALL-NEW ULTIMATES face off/);
+    // });
+
+    // it('Comic', function(){
+    //     var comic = <Comic comic={mockComics[0]} className="col-md-8 col-md-offset-2" displaySize="full" flux={flux} />;
+    //     comic.getFlux = function () {
+    //         return flux;
+    //     }
+    //     ReactTestUtils.renderIntoDocument(comic);
+    //     console.log(comic)
+    //     expect(comic.refs).toBeDefined();
+    // });
 });
