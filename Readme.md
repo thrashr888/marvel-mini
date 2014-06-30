@@ -13,6 +13,8 @@ Marvel Mini is a showcase of Marvel comics and creators. It's a simple ReactJS d
 
 ## Install
 
+Marvel Mini requires Git and NodeJS to be installed. The rest is installed via npm and Bower.
+
     > git clone https://github.com/thrashr888/marvel-mini.git
     > cd marvel-mini
     > npm install
@@ -64,8 +66,9 @@ Marvel Mini is a showcase of Marvel comics and creators. It's a simple ReactJS d
 
 ## TODO
 
-- Add h1 and meta tags.
-- Add microdata to the markup for bots (http://schema.org/Book, http://schema.org/Person).
+- Add h1 tags.
+- Add microdata to the markup for bots (http://schema.org/Book and http://schema.org/Person).
+- Refactor colors to Less variables.
 - Add more tests.
 - Render in a server for bots.
 - Make the build run the tests.

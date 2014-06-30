@@ -13,6 +13,8 @@ var FluxMixin = Fluxxor.FluxMixin(React),
 var Comic = require('./Comic.jsx');
 var Creator = require('./Creator.jsx');
 
+var Config = require('../config.jsx');
+
 /**
  * ComicPage View
  */
@@ -55,6 +57,10 @@ var ComicPage = React.createClass({
   render: function () {
     // console.log('ComicPage props', this.props.params)
     // console.log('ComicPage state', this.state)
+
+    if (this.state.comic) {
+      document.title = this.state.comic.title + Config.htmlTitle;
+    }
 
     var featuredComicList = this.state.featuredComics.comics.map(function (comic, index) {
       return <Comic comic={comic} className="col-lg-4 col-md-6 col-sm-12" key={'cpf' + index + comic.id} />;

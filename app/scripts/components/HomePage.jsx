@@ -90,6 +90,8 @@ var HomePage = React.createClass({
   render: function () {
     // console.log('homepage state', this.state)
 
+    document.title = 'Marvel Mini';
+
     if (this.state.comics) {
       var featuredComicList = this.state.featuredComics.comics.map(function (comic, index) {
         return <Comic comic={comic} key={'hp-feat-co' + comic.id + index} className="col-lg-6 col-md-6 col-sm-12" />;

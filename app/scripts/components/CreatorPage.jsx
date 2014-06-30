@@ -13,6 +13,8 @@ var FluxMixin = Fluxxor.FluxMixin(React),
 var Comic = require('./Comic.jsx');
 var Creator = require('./Creator.jsx');
 
+var Config = require('../config.jsx');
+
 /**
  * CreatorPage View
  */
@@ -50,6 +52,10 @@ var CreatorPage = React.createClass({
   render: function () {
     // console.log('CreatorPage props', this.props.params)
     // console.log('CreatorPage state', this.state)
+
+    if (this.state.creator) {
+      document.title = this.state.creator.fullName + Config.htmlTitle;
+    }
 
     var creatorView = '';
     if (this.state.creator && this.state.creator) {
