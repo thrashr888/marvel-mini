@@ -1,0 +1,19 @@
+{
+    "pages": [
+        {
+            "id": "about",
+            "title": "About",
+            "text": "This is the about page."
+        },
+        {
+            "id": "privacy",
+            "title": "Privacy",
+            "text": "This is the privacy page."
+        },
+        {
+            "id": "tos",
+            "title": "Terms of Service",
+            "text": "This is the TOS page."
+        }
+    ]
+}

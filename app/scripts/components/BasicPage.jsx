@@ -8,6 +8,8 @@ var React = require('react/react.js');
 var Fluxxor = require('fluxxor/index.js');
 var FluxChildMixin = Fluxxor.FluxChildMixin(React);
 
+var BasicPageContent = require('../stores/BasicPage.json');
+
 /**
  * BasicPage View
  */
@@ -16,9 +18,14 @@ var BasicPage = React.createClass({
 
   render: function () {
     // console.log(this.props)
+    var page = BasicPageContent.pages.filter(function (page) {
+        return page.id === this.props.params.id;
+    }.bind(this))[0];
+
     return (
-      <div className={'row l-creator col-md-12'}>
-        <h1>BasicPage</h1>
+      <div className={'l-page l-page-detail'}>
+        <h2>{page.title}</h2>
+        <div dangerouslySetInnerHTML={{__html: page.text}}></div>
       </div>
     );
   }

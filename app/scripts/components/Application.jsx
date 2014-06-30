@@ -90,7 +90,16 @@ var Application = React.createClass({
 
         <div className="m-footer--container row">
           <div className="m-footer col-md-12">
-            <p>&copy; 2014 Paul Thrasher</p>
+            <div className="m-footer--links col-md-6">
+              <ul>
+                <li><a href="/pages/about">About</a></li>
+                <li><a href="/pages/tos">TOS</a></li>
+                <li><a href="/pages/privacy">Privacy</a></li>
+              </ul>
+            </div>
+            <div className="m-footer--copyright col-md-6">
+              <p>&copy; 2014 Paul Thrasher</p>
+            </div>
           </div>
         </div>
 

@@ -62,6 +62,14 @@ Marvel Mini is a showcase of Marvel comics and creators. It's a simple ReactJS d
     > sudo docker build -t thrashr888/marvel-mini .
     > sudo docker run -t -p 49160:9000 thrashr888/marvel-mini
 
+## TODO
+
+- Add h1 and meta tags.
+- Add microdata to the markup for bots (http://schema.org/Book, http://schema.org/Person).
+- Add more tests.
+- Render in a server for bots.
+- Make the build run the tests.
+
 ## Thanks
 
 This app takes advantage of many open source libraries. Special thanks go to the creators of ReactJS, Browserify, Gulp, Bootstrap, Less, jQuery, HTML5 Boilerplate and Docker. Also a big thank you to Marvel for providing an open API.
