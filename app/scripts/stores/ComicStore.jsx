@@ -53,7 +53,7 @@ var ComicStore = Fluxxor.createStore({
       '&orderBy=' + (payload.orderBy || '-onsaleDate') +
       '&limit=' + (payload.limit || 24);
     var url = Config.marvelApiEndpoint + path + '&apikey=' + Config.marvelUserKey;
-    console.log('onGetComics.url', url)
+    // console.log('onGetComics.url', url)
     this.loading = true;
     this.emit('change');
 

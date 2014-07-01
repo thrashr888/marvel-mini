@@ -16,6 +16,7 @@ var page = require('page');
 
 var HomePage = require('./HomePage.jsx');
 var ComicPage = require('./ComicPage.jsx');
+var CreatorHubPage = require('./CreatorHubPage.jsx');
 var CreatorPage = require('./CreatorPage.jsx');
 var BasicPage = require('./BasicPage.jsx');
 var PageNotFoundPage = require('./PageNotFoundPage.jsx');
@@ -29,6 +30,7 @@ var Application = React.createClass({
 
   routes: [
     {keyword: 'homeHub', path: '/', component: HomePage},
+    {keyword: 'creatorHub', path: '/creators', component: CreatorHubPage},
     {keyword: 'comicDetail', path: '/comics/:id', component: ComicPage},
     {keyword: 'creatorDetail', path: '/creators/:id', component: CreatorPage},
     {keyword: 'basicDetail', path: '/pages/:id', component: BasicPage},
@@ -75,7 +77,7 @@ var Application = React.createClass({
       topNav = (<div className="row m-header--container">
           <div className="col-md-8 col-md-offset-2 header m-header">
               <ul className="nav pull-right m-header--nav">
-                  <li className="active m-header--link"><a href="/">Home</a></li>
+                  <li className="active m-header--link"><a href="/creators">Creators</a> <a href="/">Home</a></li>
               </ul>
               <h3 className="text-muted m-header--logo"><a href="/">Marvel Mini</a></h3>
           </div>

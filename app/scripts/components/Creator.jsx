@@ -55,7 +55,7 @@ var Creator = React.createClass({
           <h3 className={"m-creator--title " + (this.props.displaySize === 'full' ? 'col-sm-8' : '')}><a className="m-creator--title--text" href={'/creators/' + item.id}>{item.fullName}</a></h3>
 
           <div className="l-meta col-sm-12">
-            {false && comics && comics[0] ? <div className="col-sm-6 m-creator--comics">
+            {comics && comics[0] ? <div className="col-sm-6 m-creator--comics">
               <h4>Comics</h4>
               <ul>{comics}</ul>
             </div> : ''}

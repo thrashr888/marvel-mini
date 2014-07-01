@@ -27,7 +27,7 @@ var CreatorStore = Fluxxor.createStore({
       // console.log(comics[i]);
       comics[i].id = parseInt(comics[i].resourceURI.replace('http://gateway.marvel.com/v1/public/comics/', ''));
     }
-    console.log('translated comics', comics);
+    // console.log('translated comics', comics);
   },
 
   onAddCreators: function onAddCreators(payload) {
