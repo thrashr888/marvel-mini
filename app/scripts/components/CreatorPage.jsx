@@ -72,7 +72,7 @@ var CreatorPage = React.createClass({
 
   render: function () {
     // console.log('CreatorPage props', this.props.params)
-    console.log('CreatorPage state', this.state)
+    // console.log('CreatorPage state', this.state)
 
     if (this.state.creator && this.state.creator.fullName) {
       document.title = this.state.creator.fullName + Config.htmlTitle;

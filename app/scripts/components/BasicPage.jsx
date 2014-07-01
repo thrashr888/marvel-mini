@@ -26,8 +26,10 @@ var BasicPage = React.createClass({
 
   render: function () {
     // console.log(this.props)
+    // console.log(this.state)
+
     this.state.page = BasicPageContent.pages.filter(function (page) {
-        return page.id === this.props.params.id;
+      return page.id === this.props.params.id + '';
     }.bind(this))[0];
 
     if (this.state.page) {

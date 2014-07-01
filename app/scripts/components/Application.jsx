@@ -47,7 +47,7 @@ var Application = React.createClass({
       var keyword = route.keyword;
       var Component = route.component;
       page(url, function (ctx) {
-        ctx.params.id = parseInt(ctx.params.id);
+        ctx.params.id = ctx.params.id;
         self.setState({
           componentKeyword: keyword,
           component: <Component
