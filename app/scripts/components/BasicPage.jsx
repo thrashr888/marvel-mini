@@ -30,7 +30,9 @@ var BasicPage = React.createClass({
         return page.id === this.props.params.id;
     }.bind(this))[0];
 
-    document.title = this.state.page.title + Config.htmlTitle;
+    if (this.state.page) {
+      document.title = this.state.page.title + Config.htmlTitle;
+    }
 
     return (
       <div className="l-page l-page-detail">
