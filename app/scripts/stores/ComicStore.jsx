@@ -22,6 +22,13 @@ var ComicStore = Fluxxor.createStore({
     this.comics = [];
   },
 
+  _translateCreatorsIds: function _translateComicsIds(creators) {
+    for(var i in creators) {
+      // console.log(creators[i]);
+      creators[i].id = parseInt(creators[i].resourceURI.replace('http://gateway.marvel.com/v1/public/creators/', ''));
+    }
+  },
+
   onAddComics: function onAddComics(payload) {
     for (var i = 0, l = payload.comics.length; i < l; i++) {
       var comic = payload.comics[i];
@@ -32,6 +39,7 @@ var ComicStore = Fluxxor.createStore({
       // prices, resourceURI, series, stories, textObjects, thumbnail,
       // title, upc, urls, variantDescription, variants
       // this.comics.push(comic);
+      this._translateCreatorsIds(comic.creators.items);
       this.comics[comic.id] = comic;
     }
     this.emit('change');
@@ -40,12 +48,12 @@ var ComicStore = Fluxxor.createStore({
   onGetComics: function onGetComics(payload) {
     // console.log(payload)
     var page = (payload.page || 1) - 1;
-    var path = this.endpoint +
-      '?offset=' + (payload.limit * page) +
+    var path = (payload.endpoint || this.endpoint) +
+      '?offset=' + ((payload.limit || 24) * page) +
       '&orderBy=' + (payload.orderBy || '-onsaleDate') +
       '&limit=' + (payload.limit || 24);
     var url = Config.marvelApiEndpoint + path + '&apikey=' + Config.marvelUserKey;
-    // console.log('url', url)
+    console.log('onGetComics.url', url)
     this.loading = true;
     this.emit('change');
 
@@ -82,7 +90,7 @@ var ComicStore = Fluxxor.createStore({
         this.onAddComics({comics: res.data.results});
       }.bind(this),
       error: function(xhr, status, err) {
-        console.error(payload.url, status, err.toString());
+        console.error(url, status, err.toString());
         this.loading = false;
         this.emit('change');
       }.bind(this)
@@ -121,6 +129,19 @@ var ComicStore = Fluxxor.createStore({
     return {
       loading: this.loading,
       comics: this.comics.sort(this.sortByDate).slice(0, count || 4)
+    };
+  },
+
+  getCreatorComics: function getCreatorComics(creatorId) {
+    return {
+      loading: this.loading,
+      comics: this.comics.filter(function(comic){
+          for(var i in comic.creators.items) {
+            if (comic.creators.items[i].id === creatorId) {
+              return comic;
+            }
+          }
+        }).sort(this.sortByDate)
     };
   },
 

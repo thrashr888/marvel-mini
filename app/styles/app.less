@@ -102,6 +102,7 @@ body {
             text-transform: uppercase;
             font-style: italic;
             font-weight: bold;
+            line-height: 1.2em;
         }
     }
 
@@ -116,7 +117,6 @@ body {
         .m-comic {
             height: 255px;
         }
-        margin-top: 45px;
 
         transition: opacity 0.5s ease-in-out;
 
@@ -379,16 +379,23 @@ body {
 }
 
 .l-page--detail {
-    .l-list--container {
+    .l-list--container,
+    .l-content--container {
         background-color: black;
-    }
 
-    .l-list {
-        background-color: white;
-        margin-top: 0;
+        .l-list,
+        .l-content {
+            background-color: white;
+            // margin-top: 0;
 
-        h2 {
-            // background-color: white;
+            &.is-loading {
+                opacity: 0;
+                transition: opacity 0.5s ease-in-out;
+            }
+
+            h2 {
+                background-color: white;
+            }
         }
     }
 }

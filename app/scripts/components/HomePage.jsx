@@ -99,16 +99,12 @@ var HomePage = React.createClass({
       var comicList = this.state.comics.comics.map(function (comic, index) {
         return <Comic comic={comic} key={'hp-co' + comic.id + index} className="col-lg-3 col-md-4 col-sm-6" />;
       });
-    } else {
-      return <div><p>Loading...</p></div>;
     }
 
     if (this.state.creators) {
       var creatorList = this.state.creators.creators.map(function (creator, index) {
         return <Creator creator={creator} key={'hp-cr' + creator.id + index} className="col-lg-2 col-md-3 col-sm-4" />;
       });
-    } else {
-      return <div><p>Loading...</p></div>;
     }
 
     if (this.state.comics.comics && this.state.comics.comics[this.state.jumboIndex]) {

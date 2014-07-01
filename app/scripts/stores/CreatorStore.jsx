@@ -22,6 +22,14 @@ var CreatorStore = Fluxxor.createStore({
     this.creators = [];
   },
 
+  _translateComicsIds: function _translateComicsIds(comics) {
+    for(var i in comics) {
+      // console.log(comics[i]);
+      comics[i].id = parseInt(comics[i].resourceURI.replace('http://gateway.marvel.com/v1/public/comics/', ''));
+    }
+    console.log('translated comics', comics);
+  },
+
   onAddCreators: function onAddCreators(payload) {
     for (var i = 0, l = payload.creators.length; i < l; i++) {
       var creator = payload.creators[i];
@@ -29,18 +37,10 @@ var CreatorStore = Fluxxor.createStore({
       // comics, events, firstName, fullName, id, lastName, middleName
       // modified, resourceURI, series, stories, suffix, thumbnail, urls
       // this.creators.push(creator);
+      this._translateComicsIds(creator.comics.items);
       this.creators[creator.id] = creator;
-      // this.getCreatorComics(creator.comics.items);
     }
     this.emit('change');
-  },
-
-  getCreatorComics: function getCreatorComics(comics) {
-    // This is really slow if called on many comics.
-    for (var i in comics) {
-      var id = parseInt(comics[i].resourceURI.replace('http://gateway.marvel.com/v1/public/comics/', ''));
-      this.flux.actions.getComic(id);
-    }
   },
 
   onGetCreators: function onGetDocs(payload) {
@@ -85,7 +85,7 @@ var CreatorStore = Fluxxor.createStore({
         this.onAddCreators({creators: res.data.results});
       }.bind(this),
       error: function(xhr, status, err) {
-        console.error(payload.url, status, err.toString());
+        console.error(url, status, err.toString());
         this.loading = false;
         this.emit('change');
       }.bind(this)

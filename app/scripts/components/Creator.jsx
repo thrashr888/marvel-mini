@@ -33,17 +33,6 @@ var Creator = React.createClass({
     var comics = item.comics.items.map(function (comic, index) {
       return <li key={'cr-comics' + index}><a href={resourceURItoLocal(comic.resourceURI)}>{comic.name}</a></li>;
     });
-
-    var featuredComics = null;
-    // var featuredComics = item.comics.items.map(function (comic, index) {
-    //   var id = parseInt(comic.resourceURI.replace('http://gateway.marvel.com/v1/public/comics/', ''));
-    //   var fullComic = this.getFlux().store('ComicStore').getComic(id);
-    //   // console.log('creator.fullComic', comic, fullComic)
-    //   if (fullComic) {
-    //     return <Comic comic={fullComic} className="col-lg-6 col-md-6 col-sm-12" key={'cr-comics-feat' + index + fullComic.id} />;
-    //   }
-    // }.bind(this));
-
     var events = item.events.items.map(function (event, index) {
       return <li key={'cr-events' + index}>{event.name}</li>;
     });
@@ -65,20 +54,10 @@ var Creator = React.createClass({
 
           <h3 className={"m-creator--title " + (this.props.displaySize === 'full' ? 'col-sm-8' : '')}><a className="m-creator--title--text" href={'/creators/' + item.id}>{item.fullName}</a></h3>
 
-          {featuredComics && featuredComics[0] ? <div className="m-creator--featured-comics row l-list col-md-12">
-            <h4>Featured Comics</h4>
-            {featuredComics}
-          </div> : ''}
-
           <div className="l-meta col-sm-12">
-            {comics && comics[0] ? <div className="col-sm-6 m-creator--comics">
+            {false && comics && comics[0] ? <div className="col-sm-6 m-creator--comics">
               <h4>Comics</h4>
               <ul>{comics}</ul>
-            </div> : ''}
-
-            {events && events[0] ? <div className="col-sm-6 m-creator--events">
-              <h4>Events</h4>
-              <ul>{events}</ul>
             </div> : ''}
 
             {serieses && serieses[0] ? <div className="col-sm-6 m-creator--series">
@@ -89,6 +68,11 @@ var Creator = React.createClass({
             {stories && stories[0] ? <div className="col-sm-6 m-creator--stories">
               <h4>Stories</h4>
               <ul>{stories}</ul>
+            </div> : ''}
+
+            {events && events[0] ? <div className="col-sm-6 m-creator--events">
+              <h4>Events</h4>
+              <ul>{events}</ul>
             </div> : ''}
 
             {urls && urls[0] ? <div className="col-sm-6 m-creator--urls">
