@@ -60,14 +60,6 @@ gulp.task('scripts', function () {
 });
 
 
-gulp.task('jade', function () {
-    return gulp.src('app/template/*.jade')
-        .pipe($.jade({ pretty: true }))
-        .pipe(gulp.dest('dist'))
-        .pipe($.connect.reload());
-});
-
-
 // HTML
 gulp.task('html', function () {
     return gulp.src('app/*.html')
@@ -246,12 +238,6 @@ gulp.task('watch', ['html', 'bundle', 'connect', 'stubby'], function () {
 
     // Watch .scss files
     gulp.watch('app/styles/**/*.less', ['styles']);
-
-
-
-    // Watch .jade files
-    gulp.watch('app/template/**/*.jade', ['jade', 'html']);
-
 
 
     // Watch .jsx files
